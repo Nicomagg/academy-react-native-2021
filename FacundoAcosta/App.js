@@ -1,14 +1,19 @@
 import React from 'react';
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native';
+import Home from './Components/home';
+import { CharactersProvider } from './Components/rick&mortyContext'
 
 function App() {
   
   return (
-    <View>
-      <Text>Hello World</Text>
-    </View>
+    <CharactersProvider>
+      <View>
+        <Home />
+      </View>
+    </CharactersProvider>
   )
 }
+
 const styles = StyleSheet.create({
 })
 
