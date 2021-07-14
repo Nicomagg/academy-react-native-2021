@@ -12,7 +12,6 @@ function Home() {
         fetch('https://rickandmortyapi.com/api/character')
         .then(res => res.json())
         .then(data => setCharacters(data.results))
-        .then(console.log(characters.length))
     }, [])
     
 
