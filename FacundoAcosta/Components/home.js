@@ -1,25 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { charactersContext } from './rick&mortyContext';
+
 import CharacterList from './charactersList';
 
 
 function Home() {
 
-    const [characters , setCharacters ] = useContext(charactersContext);
-
-    useEffect(() => {
-        fetch('https://rickandmortyapi.com/api/character')
-        .then(res => res.json())
-        .then(data => setCharacters(data.results))
-    }, [])
-    
-
     return (
-        <View>
-            <CharacterList />
-        </View>
-    )
+    <View>
+        <CharacterList />
+    </View>
+    ) 
+    
 }
 
 export default Home;
