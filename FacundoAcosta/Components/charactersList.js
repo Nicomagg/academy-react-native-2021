@@ -11,6 +11,7 @@ function CharacterList() {
         <TouchableHighlight
             activeOpacity={0.6}
             underlayColor='#DDDDDD'
+            onPress={()=> console.log('touch')}
             >
             <CharacterPreView character={item}/>
         </TouchableHighlight>
