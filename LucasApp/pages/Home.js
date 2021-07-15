@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
+import MenuIcon from './../components/MenuIcon';
 
 const Home = () => (
   <View style={styles.container}>
-    <Text>Home</Text>
+    <Text>Home Content</Text>
   </View>
 );
 
