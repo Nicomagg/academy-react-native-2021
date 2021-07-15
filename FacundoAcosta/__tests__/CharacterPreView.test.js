@@ -29,12 +29,13 @@ describe('<CharacterPreView />', () => {
     });
 
     test('Rendering Text Elements', () => {
-
         characterPreView.getByText(characterMock.name);
         characterPreView.getByText(characterMock.status);
         characterPreView.getByText(characterMock.species);
         characterPreView.getByText(characterMock.origin.name);
         characterPreView.getByText(characterMock.location.name);
+        characterPreView.getByText('Last known location:');
+        characterPreView.getByText('First seen in:');
   
     })
 })
