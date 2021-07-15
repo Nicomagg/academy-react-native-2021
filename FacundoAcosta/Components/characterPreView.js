@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     },
     imgPreview: {
         width: '50%',
-        height: 200
+        height: 150
     },
     data: {
         marginLeft: 25,
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 15,
-        marginBottom: 10,
+        marginBottom: 5,
         width: '95%'
     },
     status: {
