@@ -1,21 +1,25 @@
-import 'react-native-gesture-handler';
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+
 import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#E0e0e0',
-    padding: 15,
-  },
-});
+import {CharactersContextProvider} from './src/contexts/CharactersContext';
+import CharacterList from './src/views/CharacterList';
 
-export default function App() {
-  return (
+const Stack = createStackNavigator();
+
+const App = () => (
+  <CharactersContextProvider>
     <NavigationContainer>
-      <View style={styles.container}>
-        <Text>Heliana App</Text>
-      </View>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="CharacterList"
+          component={CharacterList}
+          options={{title: 'Rick & Morty'}}
+        />
+      </Stack.Navigator>
     </NavigationContainer>
-  );
-}
+  </CharactersContextProvider>
+);
+
+export default App;
