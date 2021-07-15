@@ -1,22 +1,28 @@
+import React, { useState, useEffect, useReducer } from "react";
 import "./App.css";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+
+function Welcome() {
+  return (
+    <p>
+      This is a simple WebApp which permits you to find any character from
+      famous Rick & Morty animated show. Push the button to see all characters
+      or search anything in particular.
+    </p>
+  );
+}
 
 function App() {
   return (
-    <div className="App container">
-      <header>
-        <h1>
-          Rick & Morty's Simple Wiki <small>by Luchi</small>
-        </h1>
-      </header>
+    <div className="container">
       <body>
-        <section>
-          This is a simple WebApp which permits you to find any character from
-          famous Rick & Morty animated show. Feel free to navigate throughout
-          sections to find the info you want to know. Leave any feedback in
-          contact section so we can get in touch about this or any topic.
-        </section>{" "}
+        <Welcome />
+        <div className="princ">
+          <div className="sec">
+            <Button color="success">Show All Characters</Button>
+          </div>
+        </div>{" "}
       </body>
-      <footer>All rights reserved </footer>{" "}
     </div>
   );
 }
