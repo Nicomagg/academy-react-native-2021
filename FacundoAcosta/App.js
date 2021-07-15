@@ -40,15 +40,16 @@ function StackNav() {
 function App() {
   
   return (
+  <NavigationContainer>
     <CharactersProvider>
-      <NavigationContainer>
-        <Drawer.Navigator>
-          <Drawer.Screen name='Drawer/home' component={StackNav}/>
-          <Drawer.Screen name='All Locations' component={RandomList} />
-          <Drawer.Screen name='All Episodes' component={RandomList} />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen name='Drawer/home' component={StackNav}/>
+        <Drawer.Screen name='All Locations' component={RandomList} />
+        <Drawer.Screen name='All Episodes' component={RandomList} />
+      </Drawer.Navigator>
     </CharactersProvider>
+  </NavigationContainer>
+    
   )
 }
 
