@@ -11,7 +11,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 
 //Components Imports
 import CharacterDetails from './Components/characterDetails';
-import RandomList from './Components/randomList';
+import CommonList from './Components/commonList';
 import ErrorPage from './Components/errorPage';
 import DrawerContent from './Components/drawerContent';
 import Home from './Components/home';
@@ -32,10 +32,10 @@ function StackHomeNav({navigation}) {
           component={Home}
           options={{
             title: 'Rick & Morty',
+            headerTitleAlign: 'center',
             headerTitleStyle: {
               fontSize: 25,
               fontWeight: 'bold',
-              marginLeft: 120,
             },
             headerRight: () => (
               <Icon.Button name="menu" size={30}
@@ -51,11 +51,29 @@ function StackHomeNav({navigation}) {
         />
         <Stack.Screen 
           name="All Locations"
-          component={RandomList}
+          component={CommonList}
+          options={{
+            title: 'Rick & Morty - All Locations',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontSize: 20,
+              fontWeight: 'bold',
+            }
+          }}
+          initialParams={{ url:'https://rickandmortyapi.com/api/location'}}
         />
         <Stack.Screen 
           name="All Episodes"
-          component={RandomList}
+          component={CommonList}
+          options={{
+            title:'Rick & Morty - All Episodes',
+            headerTitleAlign: 'center',
+            headerTitleStyle: {
+              fontSize: 20,
+              fontWeight: 'bold',
+            }
+          }}
+          initialParams={{ url:'https://rickandmortyapi.com/api/episode' }}
         />
       </Stack.Navigator>
     </CharactersProvider>   
