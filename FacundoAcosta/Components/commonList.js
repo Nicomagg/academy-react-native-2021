@@ -3,7 +3,7 @@ import { View, Text , StyleSheet , FlatList } from 'react-native';
 
 function Element({element}) {
     return (
-        <Text>{element.name}</Text>
+        <Text style={styles.component} >{element.name}</Text>
     )
 }
 
@@ -36,17 +36,22 @@ function CommonList({ navigation ,route}) {
 
     const itemSeparator = () => {
         return (
-            <View style={{ height: 5, width: '100%' }} />
+            <View style={{ height: 15, width: '100%' }} />
+        )
+    }
+    const TopBottomSeparator = () => {
+        return (
+            <View style={{ height: 35, width: '100%' }} />
         )
     }
 
     return (
-        <View>
+        <View style={styles.container}>
             <FlatList
                 data={elements}
                 ItemSeparatorComponent={itemSeparator}
-                ListFooterComponent={itemSeparator}
-                ListHeaderComponent={itemSeparator}
+                ListFooterComponent={TopBottomSeparator}
+                ListHeaderComponent={TopBottomSeparator}
                 renderItem={renderElement}
                 onEndReached={loadMore}
                 keyExtractor={element => element.id}
@@ -56,6 +61,10 @@ function CommonList({ navigation ,route}) {
 }
 
 const styles = StyleSheet.create({
-
+    component: {
+        width: '80%',
+        alignSelf: 'center',
+        fontSize: 22,
+    }
 })
 export default CommonList;
