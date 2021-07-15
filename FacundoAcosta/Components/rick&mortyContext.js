@@ -21,7 +21,7 @@ export const CharactersProvider = (props) => {
             .then(res => res.json())
             .then(data => setCharacters(data.results))
             .catch(error => {
-                console.log(error);
+                console.error(error);
                 navigation.navigate('errorPage')
             })
     }, [])
