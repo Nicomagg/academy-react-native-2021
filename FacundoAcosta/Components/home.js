@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { charactersContext } from './rick&mortyContext';
+import React from 'react';
+import { View } from 'react-native';
+
 import CharacterList from './charactersList';
 
 
