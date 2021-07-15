@@ -1,16 +1,22 @@
+//Basics imports
 import 'react-native-gesture-handler';
 import React from 'react';
 import { StyleSheet } from 'react-native';
+
+// Navigations imports
 import Icon  from 'react-native-vector-icons/Ionicons'
-import Home from './Components/home';
-import { CharactersProvider } from './Components/rick&mortyContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer'
+
+//Components Imports
 import CharacterDetails from './Components/characterDetails';
 import RandomList from './Components/randomList';
 import ErrorPage from './Components/errorPage';
 import DrawerContent from './Components/drawerContent';
+import Home from './Components/home';
+import { CharactersProvider } from './Components/rick&mortyContext';
+
 
 const Stack = createStackNavigator();
 
