@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Image , StyleSheet , Text} from 'react-native';
 
 /* { "created": "2017-11-04T22:34:53.659Z", "episode": ["https://rickandmortyapi.com/api/episode/8"],
@@ -8,14 +8,22 @@ import { View, Image , StyleSheet , Text} from 'react-native';
 "status": "unknown", "type": "Human with ants in his eyes", "url": "https://rickandmortyapi.com/api/character/20" } */
 
 function CharacterPreView({ character }) {
+    const [color, setColor] = useState('red');
+
+    useEffect(() => {
+        if (character.status === 'Alive') setColor('green');
+        else if (character.status === 'unknown') setColor('grey');
+        else if (character.status === 'Dead') setColor('yellow');
+    }, [])
+    
     return (
         <View style={styles.container}>
             <Image style={styles.imgPreview} source={{uri: character.image}} />
             <View style= {styles.data}>
                 <Text style={styles.name}>{character.name}</Text>
                 <View style={styles.status}>
-                    <Text>{character.status}</Text>
-                    <Text style={{ marginLeft: 4 }} >{character.species}</Text>
+                    <View style={{...styles.collorBullet, backgroundColor: color}} ></View>
+                    <Text>{character.status}{" "}{character.species}</Text>
                 </View>
                 <Text>Last known location:</Text>
                 <Text style={styles.txtBold}>{character.location.name}</Text>
@@ -55,6 +63,13 @@ const styles = StyleSheet.create({
     },
     status: {
         flexDirection: 'row',
+    },
+    collorBullet: {
+        height: 10,
+        width: 10,
+        borderRadius: 5,
+        alignSelf: 'center',
+        marginRight: 4
     }
 })
 
