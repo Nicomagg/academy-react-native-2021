@@ -1,31 +1,31 @@
 import React from 'react';
-import {fireEvent, render} from '@testing-library/react-native';
-import CharacterItem from '../components/CharacterItem';
-import {character} from '../responses';
+import {render} from '@testing-library/react-native';
+import CharactersList from '../components/CharactersList';
+import {allCharacters} from '../responses';
 
 let component;
 
-describe('<CharacterItem />', () => {
+describe('<CharactersList />', () => {
   beforeEach(() => {
-    component = render(<CharacterItem data={character} />);
+    component = render(<CharactersList data={allCharacters} />);
   });
   it('Renders correctly', () => {
     expect(component).toBeDefined();
   });
-  it(`Renders the character's name`, () => {
+  it(`Renders the first character's name`, () => {
     const name = component.getByText('Rick Sanchez');
     expect(name).toBeDefined();
   });
   it(`Renders the character's status and species`, () => {
-    const statusAndSpecies = component.getByText('Alive Human');
+    const statusAndSpecies = component.getAllByText('Alive Human');
     expect(statusAndSpecies).toBeDefined();
   });
   it('Renders the last known location', () => {
-    const location = component.getByText('Earth (Replacement Dimension)');
+    const location = component.getAllByText('Earth (Replacement Dimension)');
     expect(location).toBeDefined();
   });
   it('Renders the first seen in location', () => {
-    const origin = component.getByText('Earth (C-137)');
+    const origin = component.getAllByText('Earth (C-137)');
     expect(origin).toBeDefined();
   });
 });
