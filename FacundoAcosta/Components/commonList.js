@@ -10,11 +10,11 @@ function Element({element}) {
 function CommonList({ navigation ,route}) {
 
     const [elements , setElements] = useState([]);
-    const [page , setPage] = useState(1);
+    const [listPage , setListPage] = useState(1);
     const [hasMore , setHasMore] = useState(true);
     
     useEffect(()=>{
-        fetch(route.params.url+`?page=${page}`)
+        fetch(route.params.url+`?page=${listPage}`)
             .then(res => res.json())
             .then(data => {
                 setElements(prevElements => [...prevElements, ...data.results]);
@@ -24,10 +24,10 @@ function CommonList({ navigation ,route}) {
                 console.error(error);
                 navigation.navigate('errorPage')
         });
-    }, [page])
+    }, [listPage])
         
     const loadMore = () => {
-        if (hasMore) setPage(page => page + 1);
+        if (hasMore) setListPage(listPage => listPage + 1);
     }
 
     const renderElement = ({ item }) => (

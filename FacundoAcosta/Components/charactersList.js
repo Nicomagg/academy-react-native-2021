@@ -6,10 +6,16 @@ import { useNavigation } from '@react-navigation/native';
 
 function CharacterList() {
 
-    const characters = useContext(charactersContext)[0];
+    const { char, more, page } = useContext(charactersContext);
 
     const navigation = useNavigation();
 
+    const loadMoreCharactes = () => {
+        if (more.hasMore) {
+            const nextPage = page.characterPage + 1;
+            page.setCharacterPage(nextPage);
+        }
+    }
     const renderCharacter = ({item}) => (
         <TouchableHighlight
             activeOpacity={0.6}
@@ -19,7 +25,7 @@ function CharacterList() {
             <CharacterPreView character={item}/>
         </TouchableHighlight>
     )
-    
+
     const itemSeparator = () => {
         return (
             <View style={{height:10, width: '100%'}} />
@@ -28,11 +34,12 @@ function CharacterList() {
     return (
         <View style={styles.container}>
             <FlatList 
-                data={characters}
+                data={char.characters}
                 ItemSeparatorComponent={itemSeparator}
                 ListFooterComponent={itemSeparator}
                 ListHeaderComponent={itemSeparator}
                 renderItem={renderCharacter}
+                onEndReached={loadMoreCharactes}
                 keyExtractor={character => character.id} 
             />
         </View>
