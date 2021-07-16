@@ -1,8 +1,11 @@
 import React, {useContext} from 'react';
 import {FlatList, View, ActivityIndicator} from 'react-native';
-import CharacterListItem from '../components/CharacterListItem';
+
 import {CharactersContext} from '../contexts/CharactersContext';
 import {globalStyles} from '../styles/globalStyleSheet';
+
+import CharacterListItem from '../components/CharacterListItem';
+import SearchInput from '../components/filters/SearchInput';
 
 export default function CharacterList({navigation}) {
   const {isLoading, characters} = useContext(CharactersContext);
@@ -16,6 +19,11 @@ export default function CharacterList({navigation}) {
           data={characters}
           renderItem={({item}) => <CharacterListItem character={item} />}
           keyExtractor={item => item.id}
+          ListHeaderComponent={
+            <View>
+              <SearchInput />
+            </View>
+          }
         />
       )}
     </View>

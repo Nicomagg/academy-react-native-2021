@@ -29,3 +29,15 @@ export const globalStyles = StyleSheet.create({
     color: '#787878',
   },
 });
+
+export const textInputStyles = StyleSheet.create({
+  textInputStyle: {
+    height: 40,
+    borderWidth: 1,
+    paddingLeft: 20,
+    margin: 5,
+    borderColor: '#787878',
+    borderRadius: 5,
+    backgroundColor: 'white',
+  },
+});
