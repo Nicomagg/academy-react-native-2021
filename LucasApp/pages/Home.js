@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {Text, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
+import CharacterItem from '../components/CharacterItem';
 import api from './../api';
 import MenuIcon from './../components/MenuIcon';
 
@@ -19,7 +20,11 @@ const Home = () => {
   return (
     <ScrollView style={styles.container}>
       {status === 'LOADING' && <ActivityIndicator color="#999999" />}
-      {status === 'RESOLVED' && <Text>{JSON.stringify(data)}</Text>}
+      {status === 'RESOLVED' && (
+        <ScrollView>
+          <CharacterItem data={data[0]} />
+        </ScrollView>
+      )}
       {status === 'REJECTED' && (
         <Text>Error loading data. Please try again later.</Text>
       )}
