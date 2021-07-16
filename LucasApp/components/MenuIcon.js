@@ -5,7 +5,10 @@ import {useNavigation} from '@react-navigation/native';
 const MenuIcon = () => {
   const navigation = useNavigation();
   return (
-    <Pressable style={styles.container} onPress={() => navigation.openDrawer()}>
+    <Pressable
+      style={styles.container}
+      onPress={() => navigation.openDrawer()}
+      testID="menuButton">
       <View style={styles.bar} />
       <View style={styles.bar} />
       <View style={styles.bar} />
