@@ -1,12 +1,31 @@
-import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Text, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
+import api from './../api';
 import MenuIcon from './../components/MenuIcon';
 
-const Home = () => (
-  <View style={styles.container}>
-    <Text>Home Content</Text>
-  </View>
-);
+const Home = () => {
+  const [status, setStatus] = useState('LOADING');
+  const [data, setData] = useState();
+
+  useEffect(() => {
+    api
+      .getAllCharacters()
+      .then(response => {
+        setData(response);
+        setStatus('RESOLVED');
+      })
+      .catch(() => setStatus('REJECTED'));
+  }, []);
+  return (
+    <ScrollView style={styles.container}>
+      {status === 'LOADING' && <ActivityIndicator color="#999999" />}
+      {status === 'RESOLVED' && <Text>{JSON.stringify(data)}</Text>}
+      {status === 'REJECTED' && (
+        <Text>Error loading data. Please try again later.</Text>
+      )}
+    </ScrollView>
+  );
+};
 
 export default Home;
 
