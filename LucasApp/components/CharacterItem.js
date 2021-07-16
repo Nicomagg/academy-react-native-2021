@@ -2,8 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet, Pressable, Image} from 'react-native';
 
 const CharacterItem = ({data}) => {
-  console.log(data);
-  const {image, name, status, location, origin} = data;
+  const {image, name, status, species, location, origin} = data;
   return (
     <Pressable android_ripple={{color: '#eee'}}>
       <View style={styles.container}>
@@ -11,7 +10,9 @@ const CharacterItem = ({data}) => {
         <View style={styles.info}>
           <View style={styles.spacing}>
             <Text style={styles.name}>{name}</Text>
-            <Text style={styles.status}>{status}</Text>
+            <Text style={styles.status}>
+              {status} {species}
+            </Text>
             <Text style={styles.label}>Last known location:</Text>
             <Text style={styles.location}>{location.name}</Text>
             <Text style={styles.label}>First seen in:</Text>
