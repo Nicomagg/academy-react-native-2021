@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1626451397551" clover="3.2.0">
+  <project timestamp="1626451397551" name="All files">
+    <metrics statements="22" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="5" elements="33" coveredelements="17" complexity="0" loc="22" ncloc="22" packages="1" files="3" classes="3"/>
+    <file name="characterPreView.js" path="C:\Users\Facu\Desktop\Globant\academy-react-native-2021\FacundoAcosta\Components\characterPreView.js">
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <line num="11" count="3" type="stmt"/>
+      <line num="29" count="2" type="stmt"/>
+    </file>
+    <file name="charactersList.js" path="C:\Users\Facu\Desktop\Globant\academy-react-native-2021\FacundoAcosta\Components\charactersList.js">
+      <metrics statements="9" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="4"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="11" count="1" type="stmt"/>
+      <line num="13" count="1" type="stmt"/>
+      <line num="14" count="2" type="stmt"/>
+      <line num="18" count="0" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="25" count="3" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="37" count="2" type="stmt"/>
+    </file>
+    <file name="rick&mortyContext.js" path="C:\Users\Facu\Desktop\Globant\academy-react-native-2021\FacundoAcosta\Components\rick&mortyContext.js">
+      <metrics statements="11" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
+      <line num="6" count="1" type="stmt"/>
+      <line num="10" count="1" type="stmt"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
+      <line num="19" count="0" type="stmt"/>
+      <line num="20" count="0" type="stmt"/>
+      <line num="21" count="0" type="stmt"/>
+      <line num="22" count="0" type="stmt"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="25" count="0" type="stmt"/>
+      <line num="30" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>

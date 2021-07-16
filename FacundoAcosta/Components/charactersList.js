@@ -12,6 +12,7 @@ function CharacterList() {
 
     const renderCharacter = ({item}) => (
         <TouchableHighlight
+            testID={'Characters Cards'}
             activeOpacity={0.6}
             underlayColor='#DDDDDD'
             onPress={()=> navigation.navigate('characterDetails', item)}
@@ -26,21 +27,19 @@ function CharacterList() {
         )
     }
     return (
-        <View style={styles.container}>
+        <View>
             <FlatList 
                 data={characters}
                 ItemSeparatorComponent={itemSeparator}
                 ListFooterComponent={itemSeparator}
                 ListHeaderComponent={itemSeparator}
                 renderItem={renderCharacter}
-                keyExtractor={character => character.id} 
+                keyExtractor={character => character.id}
+                testID={'Characters List'}
             />
         </View>
     )
 }
 
-const styles = StyleSheet.create({
-
-})
 
 export default CharacterList;

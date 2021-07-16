@@ -19,7 +19,7 @@ describe('<CharacterPreView />', () => {
         location: {
             name: 'Location test'
         },
-        image: jest.fn()
+        image: 'url'
     }
 
     beforeEach(() => {
@@ -29,6 +29,7 @@ describe('<CharacterPreView />', () => {
     });
 
     test('Rendering Text Elements', () => {
+        expect(characterPreView).toBeDefined();
         characterPreView.getByText(characterMock.name);
         characterPreView.getByText(characterMock.status);
         characterPreView.getByText(characterMock.species);
