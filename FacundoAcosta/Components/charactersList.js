@@ -6,7 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 
 function CharacterList() {
 
-    const { char, more, page } = useContext(charactersContext);
+    const { char, more, page, searchLabel, searchVal } = useContext(charactersContext);
 
     const navigation = useNavigation();
 
@@ -15,6 +15,15 @@ function CharacterList() {
             const nextPage = page.characterPage + 1;
             page.setCharacterPage(nextPage);
         }
+    }
+
+    const handleSearch = (data) => {
+        if (searchVal.query != '') {
+            if (searchLabel.filter === 'Name') return data.filter(character => (character.name.toLowerCase().indexOf(searchVal.query) > -1));
+            else if (searchLabel.filter === 'Location') return data.filter(character => (character.location.name.toLowerCase().indexOf(searchVal.query) > -1));
+            // else if (searchLabel.filter === 'Episode') return data.filter(character => (character.episode.name.toLowerCase().indexOf(searchVal.query) > -1));
+        }
+        return data;
     }
     const renderCharacter = ({item}) => (
         <TouchableHighlight
@@ -34,7 +43,7 @@ function CharacterList() {
     return (
         <View style={styles.container}>
             <FlatList 
-                data={char.characters}
+                data={handleSearch(char.characters)}
                 ItemSeparatorComponent={itemSeparator}
                 ListFooterComponent={itemSeparator}
                 ListHeaderComponent={itemSeparator}

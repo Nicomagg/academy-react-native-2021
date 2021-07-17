@@ -14,7 +14,7 @@ function CommonList({ navigation ,route}) {
     const [hasMore , setHasMore] = useState(true);
     
     useEffect(()=>{
-        fetch(route.params.url+`?page=${listPage}`)
+        fetch(route.params.url + new URLSearchParams({page: listPage}).toString())
             .then(res => res.json())
             .then(data => {
                 setElements(prevElements => [...prevElements, ...data.results]);
