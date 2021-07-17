@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import {Text, ScrollView, StyleSheet, ActivityIndicator} from 'react-native';
-import CharacterItem from '../components/CharacterItem';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
+import CharactersList from '../components/CharactersList';
 import api from './../api';
-import MenuIcon from './../components/MenuIcon';
 
 const Home = () => {
   const [status, setStatus] = useState('LOADING');
@@ -18,17 +17,13 @@ const Home = () => {
       .catch(() => setStatus('REJECTED'));
   }, []);
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       {status === 'LOADING' && <ActivityIndicator color="#999999" />}
-      {status === 'RESOLVED' && (
-        <ScrollView>
-          <CharacterItem data={data[0]} />
-        </ScrollView>
-      )}
+      {status === 'RESOLVED' && <CharactersList data={data} />}
       {status === 'REJECTED' && (
         <Text>Error loading data. Please try again later.</Text>
       )}
-    </ScrollView>
+    </View>
   );
 };
 
@@ -38,7 +33,5 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     flex: 1,
-    paddingVertical: 18,
-    paddingHorizontal: 18,
   },
 });
