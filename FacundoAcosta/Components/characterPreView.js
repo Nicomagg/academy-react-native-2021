@@ -8,6 +8,7 @@ import { View, Image , StyleSheet , Text} from 'react-native';
 "status": "unknown", "type": "Human with ants in his eyes", "url": "https://rickandmortyapi.com/api/character/20" } */
 
 function CharacterPreView({ character }) {
+
     const colors = {Alive: 'green', unknown: 'grey', Dead: 'yellow'};
     const [color, setColor] = useState(colors[character.status]);
     

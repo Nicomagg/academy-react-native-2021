@@ -1,0 +1,18 @@
+section {
+  margin: 10px;
+}
+
+.princ {
+  align-items: center;
+  display: flex;
+  height: max-content;
+}
+
+.sec {
+  margin: 0 auto;
+}
+
+main {
+  flex-direction: column;
+  min-height: 100vh;
+}
