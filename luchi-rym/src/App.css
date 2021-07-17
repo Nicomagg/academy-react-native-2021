@@ -6,6 +6,7 @@ section {
   align-items: center;
   display: flex;
   height: max-content;
+  margin: 1%;
 }
 
 .sec {
@@ -15,4 +16,15 @@ section {
 main {
   flex-direction: column;
   min-height: 100vh;
+}
+
+svg {
+  fill: rgb(255 255 255);
+  width: 40;
+  height: 40;
+}
+
+.card {
+  min-width: 200px;
+  min-height: 500px;
 }
