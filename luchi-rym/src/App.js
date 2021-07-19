@@ -1,44 +1,39 @@
-import React, { useState, useEffect, useReducer } from "react";
+import React from "react";
 import "./App.css";
-import { Button } from "reactstrap";
+import GetCharacters from "./components/GetCharacters";
 
 function Welcome() {
   return (
-    <>
+    <div className="container mt-5">
       <div className="box">
         <form>
           <input
             className="form-control src"
-            name="search"
             name="search"
             type="text"
             placeholder="Search Anything"
           />
         </form>
       </div>
-      <div>
+      <div className="mt-1">
         <p>
           This is a simple WebApp which permits you to find any character from
           famous Rick & Morty animated show. Push the button to see all
           characters or search anything in particular.
         </p>
       </div>
-    </>
+    </div>
   );
 }
 
 function App() {
   return (
-    <div className="container">
+    <>
       <main>
         <Welcome />
-        <div className="princ">
-          <div className="sec">
-            <Button color="success">Show All Characters</Button>
-          </div>
-        </div>{" "}
+        <GetCharacters />
       </main>
-    </div>
+    </>
   );
 }
 
