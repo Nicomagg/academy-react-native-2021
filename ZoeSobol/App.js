@@ -11,6 +11,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header, Icon } from "react-native-elements";
 import Home from "./components/Home";
 import Pagination from "./components/Pagination";
+import Error from "./components/Error";
 
 export default function App() {
   const drawer = useRef(null);
@@ -23,6 +24,8 @@ export default function App() {
 
   //new code
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
   const [characters, setCharacters] = useState([]);
   const [currentPageUrl, setCurrentPageUrl] = useState(
     "https://rickandmortyapi.com/api/character"
@@ -36,13 +39,17 @@ export default function App() {
     const url = currentPageUrl;
     setLoading(true);
     const fetchData = async () => {
-      const res = await fetch(url);
-      const data = await res.json();
-      setCharacters(data.results);
-      setLoading(false);
-      setNextPageUrl(data.info.next);
-      setPrevPageUrl(data.info.prev);
-      setPages(data.info.pages);
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setCharacters(data.results);
+        setLoading(false);
+        setNextPageUrl(data.info.next);
+        setPrevPageUrl(data.info.prev);
+        setPages(data.info.pages);
+      } catch (e) {
+        setError(true);
+      }
     };
     fetchData();
   }, [currentPageUrl]);
@@ -84,6 +91,9 @@ export default function App() {
           contentContainerStyle={styles.contentContainer}
         >
           <Home characters={characters} />
+          {error && (
+            <Error error={error} setCurrentPageUrl={setCurrentPageUrl} />
+          )}
           <Pagination
             nextPage={nextPageUrl ? nextPage : null}
             prevPage={prevPageUrl ? prevPage : null}
