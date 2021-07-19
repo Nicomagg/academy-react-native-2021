@@ -60,7 +60,7 @@ function StackHomeNav({navigation}) {
               fontWeight: 'bold',
             }
           }}
-          initialParams={{ url:'https://rickandmortyapi.com/api/location'}}
+          initialParams={{ url:'https://rickandmortyapi.com/api/location/?'}}
         />
         <Stack.Screen 
           name="All Episodes"
@@ -73,7 +73,7 @@ function StackHomeNav({navigation}) {
               fontWeight: 'bold',
             }
           }}
-          initialParams={{ url:'https://rickandmortyapi.com/api/episode' }}
+          initialParams={{ url:'https://rickandmortyapi.com/api/episode/?' }}
         />
       </Stack.Navigator>
     </CharactersProvider>   
