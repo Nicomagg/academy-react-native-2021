@@ -83,6 +83,7 @@ function StackHomeNav({navigation}) {
 function App() {
   
   return (
+    
   <NavigationContainer>
       <Drawer.Navigator drawerPosition='right' drawerContent={props => <DrawerContent {...props}/>}>
         <Drawer.Screen name='Drawer/home' component={StackHomeNav}/>
