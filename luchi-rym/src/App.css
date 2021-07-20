@@ -1,0 +1,47 @@
+section {
+  margin: 10px;
+}
+
+.princ {
+  align-items: center;
+  display: flex;
+  height: max-content;
+  margin: 1%;
+}
+
+.sec {
+  margin: 0 auto;
+}
+
+main {
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+svg {
+  fill: rgb(255 255 255);
+  width: 40;
+  height: 40;
+}
+
+.alive {
+  fill: rgb(0, 170, 0);
+}
+
+.dead {
+  fill: rgb(255, 0, 0);
+}
+
+.unknown {
+  fill: rgb(134, 134, 134);
+}
+
+.accordion-body {
+  color: white;
+  background-color: rgb(49, 49, 49);
+}
+
+.accordion-button {
+  color: white;
+  background-color: rgb(49, 49, 49);
+}
