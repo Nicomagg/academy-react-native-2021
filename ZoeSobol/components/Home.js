@@ -1,19 +1,10 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Header, Icon } from "react-native-elements";
-import Hamburger from "./Hamburger";
+import Character from "./Character";
 
-export default function Home() {
-  return <Text>Home</Text>;
+export default function Home({ characters }) {
+  const charList = characters.map((character) => (
+    <Character character={character} />
+  ));
+  return charList;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

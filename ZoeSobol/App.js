@@ -1,9 +1,17 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useRef, useState } from "react";
-import { StyleSheet, Text, View, DrawerLayoutAndroid } from "react-native";
+import React, { useRef, useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  DrawerLayoutAndroid,
+  ScrollView,
+} from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Header, Icon } from "react-native-elements";
 import Home from "./components/Home";
+import Pagination from "./components/Pagination";
+import Error from "./components/Error";
 
 export default function App() {
   const drawer = useRef(null);
@@ -13,6 +21,49 @@ export default function App() {
       <Text style={styles.paragraph}>Inside Drawer</Text>
     </View>
   );
+
+  //new code
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  const [characters, setCharacters] = useState([]);
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    "https://rickandmortyapi.com/api/character"
+  );
+  const [nextPageUrl, setNextPageUrl] = useState();
+  const [prevPageUrl, setPrevPageUrl] = useState();
+  const [pages, setPages] = useState();
+  //new code
+
+  useEffect(() => {
+    const url = currentPageUrl;
+    setLoading(true);
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url);
+        const data = await res.json();
+        setCharacters(data.results);
+        setLoading(false);
+        setNextPageUrl(data.info.next);
+        setPrevPageUrl(data.info.prev);
+        setPages(data.info.pages);
+      } catch (e) {
+        setError(true);
+      }
+    };
+    fetchData();
+  }, [currentPageUrl]);
+
+  function nextPage() {
+    setCurrentPageUrl(nextPageUrl);
+  }
+  function prevPage() {
+    setCurrentPageUrl(prevPageUrl);
+  }
+  function goToPage(num) {
+    setCurrentPageUrl(`https://rickandmortyapi.com/api/character?page=${num}`);
+  }
+
   return (
     <SafeAreaProvider>
       <DrawerLayoutAndroid
@@ -35,7 +86,22 @@ export default function App() {
             />
           }
         />
-        <Home />
+        <ScrollView
+          style={styles.scrollView}
+          contentContainerStyle={styles.contentContainer}
+        >
+          <Home characters={characters} />
+          {error && (
+            <Error error={error} setCurrentPageUrl={setCurrentPageUrl} />
+          )}
+          <Pagination
+            nextPage={nextPageUrl ? nextPage : null}
+            prevPage={prevPageUrl ? prevPage : null}
+            goToPage={goToPage}
+            pages={pages}
+          />
+        </ScrollView>
+        <StatusBar style="auto" />
       </DrawerLayoutAndroid>
     </SafeAreaProvider>
   );
@@ -53,7 +119,6 @@ const styles = StyleSheet.create({
   },
   paragraph: {
     padding: 16,
-    fontSize: 15,
-    textAlign: "center",
+    fontSize: 20,
   },
 });
