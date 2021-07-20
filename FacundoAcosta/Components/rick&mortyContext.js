@@ -18,8 +18,6 @@ export const CharactersProvider = (props) => {
 
     // Creating instace of navigation hook
     const navigation = useNavigation();
-    
-
 
     //Fetching API
     useEffect(() => {

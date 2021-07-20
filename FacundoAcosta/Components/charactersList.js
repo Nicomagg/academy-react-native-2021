@@ -11,10 +11,7 @@ function CharacterList() {
     const navigation = useNavigation();
 
     const loadMoreCharactes = () => {
-        if (more.hasMore) {
-            const nextPage = page.Page + 1;
-            page.setPage(nextPage);
-        }
+        if (more.hasMore) page.setPage(page.Page + 1);
     }
 
     const handleSearch = () => {
