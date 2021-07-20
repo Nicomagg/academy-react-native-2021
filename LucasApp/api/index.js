@@ -5,4 +5,8 @@ export default {
     fetch(`${BASE_URL}/character`)
       .then(response => response.json())
       .then(data => data.results),
+  getCharactersFilteredByName: name =>
+    fetch(`${BASE_URL}/character/?name=${name}`)
+      .then(response => response.json())
+      .then(data => data.results),
 };

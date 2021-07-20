@@ -8,14 +8,28 @@ const Home = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    api
+    /* api
       .getAllCharacters()
       .then(response => {
         setData(response);
         setStatus('RESOLVED');
       })
-      .catch(() => setStatus('REJECTED'));
+      .catch(() => setStatus('REJECTED')); */
+
+    handleSearchByName('ohnny Depp'); // works 😀
   }, []);
+
+  const handleSearchByName = name => {
+    setStatus('LOADING');
+    api
+      .getCharactersFilteredByName(name)
+      .then(response => {
+        setData(response);
+        setStatus('RESOLVED');
+      })
+      .catch(() => setStatus('REJECTED'));
+  };
+
   return (
     <View style={styles.container}>
       {status === 'LOADING' && <ActivityIndicator color="#999999" />}
