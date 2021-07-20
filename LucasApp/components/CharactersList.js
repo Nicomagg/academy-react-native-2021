@@ -25,9 +25,17 @@ const CharactersList = ({data}) => {
   );
 };
 
-export default CharactersList;
-
 const styles = StyleSheet.create({
   container: {paddingHorizontal: 24},
   separator: {height: 20},
 });
+
+function areEqual(prevProps, nextProps) {
+  if (JSON.stringify(prevProps.data) === JSON.stringify(nextProps.data)) {
+    return true;
+  }
+
+  return false;
+}
+
+export default React.memo(CharactersList, areEqual);
