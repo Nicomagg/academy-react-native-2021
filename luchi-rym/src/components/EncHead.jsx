@@ -1,4 +1,5 @@
 import React from "react";
+import EpisLocat from "./EpisLocat";
 
 function Head() {
   return (
@@ -21,18 +22,7 @@ function Head() {
           </button>
 
           <div className="collapse navbar-collapse" id="EpiLoca">
-            <ul className="navbar-nav me-auto mb-2">
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  All Locations
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/">
-                  All Episodes
-                </a>
-              </li>
-            </ul>
+            <EpisLocat />
           </div>
         </div>
       </nav>

@@ -24,7 +24,12 @@ svg {
   height: 40;
 }
 
-.card {
-  min-width: 200px;
-  min-height: 500px;
+.accordion-body {
+  color: white;
+  background-color: rgb(49, 49, 49);
+}
+
+.accordion-button {
+  color: white;
+  background-color: rgb(49, 49, 49);
 }
