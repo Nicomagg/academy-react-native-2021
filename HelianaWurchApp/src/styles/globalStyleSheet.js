@@ -52,7 +52,7 @@ export const textListStyles = StyleSheet.create({
     fontWeight: '700',
     color: '#787878',
     paddingBottom: 10,
-    margin: 15,
+    margin: 17,
     borderBottomWidth: 1,
     borderBottomColor: '#E0E0E0',
   },

@@ -1,4 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react';
+import {fetchEndpointData} from '../utils/api';
 
 const AllLocationsContext = createContext();
 
@@ -7,13 +8,7 @@ function AllLocationsContextProvider({children}) {
   const [locations, setLocations] = useState(null);
 
   useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/location')
-      .then(response => response.json())
-      .then(json => {
-        setLocations(json.results);
-      })
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    fetchEndpointData('location', setLocations, setLoading);
   }, []);
 
   return (

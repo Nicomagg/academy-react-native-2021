@@ -1,4 +1,5 @@
 import React, {createContext, useState, useEffect} from 'react';
+import {fetchEndpointData} from '../utils/api';
 
 const AllEpisodesContext = createContext();
 
@@ -7,13 +8,7 @@ function AllEpisodesContextProvider({children}) {
   const [episodes, setEpisodes] = useState(null);
 
   useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/episode')
-      .then(response => response.json())
-      .then(json => {
-        setEpisodes(json.results);
-      })
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    fetchEndpointData('episode', setEpisodes, setLoading);
   }, []);
 
   return (

@@ -1,59 +1,51 @@
 import React, {createContext, useState, useEffect} from 'react';
+import {API_URL} from '../utils/api';
 
 const CharactersContext = createContext();
 
 function CharactersContextProvider({children}) {
-  const [isLoading, setLoading] = useState(true);
-  const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState('');
-  const [filteredCharacters, setFilteredCharacters] = useState([]);
+
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredCharacters, setFilteredCharacters] = useState([]);
+
+  const [isLoading, setLoading] = useState(false);
+  const [characters, setCharacters] = useState([]);
 
   const loadMoreItem = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const API_URL = 'https://rickandmortyapi.com/api';
-
   useEffect(() => {
+    setLoading(true);
     getCharactersData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   const getCharactersData = () => {
-    setLoading(true);
     fetch(`${API_URL}/character/?page=${currentPage}`)
       .then(response => response.json())
       .then(json => {
         setCharacters([...characters, ...json.results]);
-        // setFilteredCharacters(json.results);
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
   };
 
-  /*
-  const searchFilterFunction = text => {
-    if (text) {
-      const newData = characters.filter(function (item) {
-        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredCharacters(newData);
-      setSearch(text);
-    } else {
-      setFilteredCharacters(characters);
-      setSearch(text);
-    }
-  }; */
+  useEffect(() => {
+    getCharactersData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
 
   const searchCharacterFilter = text => {
+    setLoading(true);
     fetch(`${API_URL}/character/?name=${text}`)
       .then(response => response.json())
       .then(json => {
         setFilteredCharacters(json.results);
       })
-      .catch(error => console.error(error));
+      .catch(error => console.error(error))
+      .finally(() => setLoading(false));
   };
 
   const handleInputChange = text => {
@@ -71,11 +63,10 @@ function CharactersContextProvider({children}) {
       value={{
         isLoading,
         characters,
-        // searchFilterFunction,
-        loadMoreItem,
-        handleInputChange,
         search,
         filteredCharacters,
+        handleInputChange,
+        loadMoreItem,
       }}>
       {children}
     </CharactersContext.Provider>
