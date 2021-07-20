@@ -16,6 +16,7 @@ import Home from './pages/Home';
 import MenuIcon from './components/MenuIcon';
 import AllLocations from './pages/AllLocations';
 import AllEpisodes from './pages/AllEpidodes';
+import BackButton from './components/BackButton';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -64,8 +65,7 @@ const homeStackOptions = {
 const drawerScreenOptions = {
   headerShown: true,
   headerTitleAlign: 'center',
-  headerRight: () => <MenuIcon />,
-  headerLeft: () => <></>,
+  headerLeft: () => <BackButton />,
 };
 
 const drawerStyles = {
