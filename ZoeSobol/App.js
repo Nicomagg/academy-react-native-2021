@@ -12,6 +12,7 @@ import { Header, Icon } from "react-native-elements";
 import Home from "./components/Home";
 import Pagination from "./components/Pagination";
 import Error from "./components/Error";
+import Search from "./components/Search";
 
 export default function App() {
   const drawer = useRef(null);
@@ -85,6 +86,11 @@ export default function App() {
               onPress={() => drawer.current.openDrawer()}
             />
           }
+        />
+        <Search
+          setCharacters={setCharacters}
+          characters={characters}
+          setCurrentPageUrl={setCurrentPageUrl}
         />
         <ScrollView
           style={styles.scrollView}
