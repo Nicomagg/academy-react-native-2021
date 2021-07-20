@@ -14,6 +14,8 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import Home from './pages/Home';
 import MenuIcon from './components/MenuIcon';
+import AllLocations from './pages/AllLocations';
+import AllEpisodes from './pages/AllEpidodes';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -35,6 +37,13 @@ const homeStackOptions = {
   headerRight: () => <MenuIcon />,
 };
 
+const drawerScreenOptions = {
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerRight: () => <MenuIcon />,
+  headerLeft: () => <></>,
+};
+
 const App = () => {
   return (
     <NavigationContainer>
@@ -43,6 +52,16 @@ const App = () => {
         drawerPosition="right"
         drawerContentOptions={drawerContentOptions}>
         <Drawer.Screen name="Home" component={HomeStack} />
+        <Drawer.Screen
+          options={drawerScreenOptions}
+          name="All Locations"
+          component={AllLocations}
+        />
+        <Drawer.Screen
+          options={drawerScreenOptions}
+          name="All Episodes"
+          component={AllEpisodes}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
