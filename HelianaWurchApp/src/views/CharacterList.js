@@ -1,41 +1,39 @@
 import React, {useContext} from 'react';
-import {FlatList, View, Text, ActivityIndicator} from 'react-native';
+import {FlatList, View} from 'react-native';
 
 import {CharactersContext} from '../contexts/CharactersContext';
 
-import CharacterListItem from '../components/CharacterListItem';
 import SearchInput from '../components/filters/SearchInput';
+import CharacterListItem from '../components/CharacterListItem';
+import NoResults from '../components/NoResults';
 
 export default function CharacterList({navigation}) {
-  const {isLoading, searchFilterFunction, search, filteredCharacters} =
-    useContext(CharactersContext);
-
-  const NoResults = () => {
-    return <Text>No Results</Text>;
-  };
-
-  const handleInputChange = text => {
-    searchFilterFunction(text);
-  };
+  const {
+    isLoading,
+    characters,
+    search,
+    filteredCharacters,
+    handleInputChange,
+    loadMoreItem,
+  } = useContext(CharactersContext);
 
   return (
     <View>
-      {isLoading ? (
-        <ActivityIndicator size="large" color="#787878" />
-      ) : (
-        <View>
-          <SearchInput
-            inputValue={search}
-            handleInputChange={handleInputChange}
-          />
-          <FlatList
-            data={filteredCharacters}
-            renderItem={({item}) => <CharacterListItem character={item} />}
-            keyExtractor={item => item.id}
-            ListEmptyComponent={NoResults}
-          />
-        </View>
-      )}
+      <View>
+        <SearchInput
+          inputValue={search}
+          handleInputChange={handleInputChange}
+        />
+        <FlatList
+          data={search ? filteredCharacters : characters}
+          renderItem={({item}) => <CharacterListItem character={item} />}
+          keyExtractor={item => item.id}
+          ListEmptyComponent={NoResults}
+          contentContainerStyle={{paddingBottom: 120}}
+          onEndReached={loadMoreItem}
+          onEndReachedThreshold={0.5}
+        />
+      </View>
     </View>
   );
 }
