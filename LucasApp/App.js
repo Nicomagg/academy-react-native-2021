@@ -14,6 +14,8 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import Home from './pages/Home';
 import MenuIcon from './components/MenuIcon';
+import AllLocations from './pages/AllLocations';
+import AllEpisodes from './pages/AllEpidodes';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -30,22 +32,46 @@ const HomeStack = () => {
   );
 };
 
-const homeStackOptions = {
-  headerTitleAlign: 'center',
-  headerRight: () => <MenuIcon />,
-};
-
 const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
         initialRouteName="Home"
         drawerPosition="right"
-        drawerContentOptions={drawerContentOptions}>
+        drawerContentOptions={drawerContentOptions}
+        drawerStyle={drawerStyles}>
         <Drawer.Screen name="Home" component={HomeStack} />
+        <Drawer.Screen
+          options={drawerScreenOptions}
+          name="All Locations"
+          component={AllLocations}
+        />
+        <Drawer.Screen
+          options={drawerScreenOptions}
+          name="All Episodes"
+          component={AllEpisodes}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
+};
+
+const homeStackOptions = {
+  headerTitleAlign: 'center',
+  headerRight: () => <MenuIcon />,
+};
+
+const drawerScreenOptions = {
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerRight: () => <MenuIcon />,
+  headerLeft: () => <></>,
+};
+
+const drawerStyles = {
+  borderTopStartRadius: 30,
+  borderBottomStartRadius: 30,
+  paddingTop: 30,
 };
 
 const drawerContentOptions = {
