@@ -16,13 +16,17 @@ function DrawerContent(props) {
                 />
                 <DrawerItem 
                     label='All Episodes' 
-                    onPress={() => props.navigation.navigate('All Episodes')}
+                    onPress={() => {
+                       props.navigation.navigate('All Episodes');
+                    }}
                     style={{ marginLeft: 60 }}
                     labelStyle={{ fontSize: 25, color: 'black' }}
                 />
                 <DrawerItem 
                     label='All Locations' 
-                    onPress={() => props.navigation.navigate('All Locations')}
+                    onPress={() => {
+                       props.navigation.navigate('All Locations');
+                    }}
                     style={{ marginLeft: 60 }}
                     labelStyle={{fontSize: 25, color: 'black'}}
                 />
