@@ -9,14 +9,20 @@ const CharacterItem = ({data}) => {
         <Image style={styles.image} source={{uri: image}} />
         <View style={styles.info}>
           <View style={styles.spacing}>
-            <Text style={styles.name}>{name}</Text>
+            <Text numberOfLines={2} style={styles.name}>
+              {name}
+            </Text>
             <Text style={styles.status}>
               {status} {species}
             </Text>
             <Text style={styles.label}>Last known location:</Text>
-            <Text style={styles.location}>{location.name}</Text>
+            <Text numberOfLines={1} style={styles.location}>
+              {location.name}
+            </Text>
             <Text style={styles.label}>First seen in:</Text>
-            <Text style={styles.location}>{origin.name}</Text>
+            <Text numberOfLines={1} style={styles.location}>
+              {origin.name}
+            </Text>
           </View>
         </View>
       </View>
