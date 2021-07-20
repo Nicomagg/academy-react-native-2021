@@ -4,21 +4,34 @@ const CharactersContext = createContext();
 
 function CharactersContextProvider({children}) {
   const [isLoading, setLoading] = useState(true);
-  const [characters, setCharacters] = useState(null);
+  const [characters, setCharacters] = useState([]);
   const [search, setSearch] = useState('');
   const [filteredCharacters, setFilteredCharacters] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const loadMoreItem = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const API_URL = 'https://rickandmortyapi.com/api';
 
   useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
+    getCharactersData();
+  }, [currentPage]);
+
+  const getCharactersData = () => {
+    setLoading(true);
+    fetch(`${API_URL}/character/?page=${currentPage}`)
       .then(response => response.json())
       .then(json => {
-        setCharacters(json.results);
-        setFilteredCharacters(json.results);
+        setCharacters([...characters, ...json.results]);
+        // setFilteredCharacters(json.results);
       })
       .catch(error => console.error(error))
       .finally(() => setLoading(false));
-  }, []);
+  };
 
+  /*
   const searchFilterFunction = text => {
     if (text) {
       const newData = characters.filter(function (item) {
@@ -32,6 +45,25 @@ function CharactersContextProvider({children}) {
       setFilteredCharacters(characters);
       setSearch(text);
     }
+  }; */
+
+  const searchCharacterFilter = text => {
+    fetch(`${API_URL}/character/?name=${text}`)
+      .then(response => response.json())
+      .then(json => {
+        setFilteredCharacters(json.results);
+      })
+      .catch(error => console.error(error));
+  };
+
+  const handleInputChange = text => {
+    if (text) {
+      searchCharacterFilter(text);
+      setSearch(text);
+    } else {
+      setFilteredCharacters(characters);
+      setSearch('');
+    }
   };
 
   return (
@@ -39,7 +71,9 @@ function CharactersContextProvider({children}) {
       value={{
         isLoading,
         characters,
-        searchFilterFunction,
+        // searchFilterFunction,
+        loadMoreItem,
+        handleInputChange,
         search,
         filteredCharacters,
       }}>

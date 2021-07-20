@@ -41,3 +41,19 @@ export const textInputStyles = StyleSheet.create({
     backgroundColor: 'white',
   },
 });
+
+export const textListStyles = StyleSheet.create({
+  text_list_container: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+  text_list: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#787878',
+    paddingBottom: 10,
+    margin: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E0E0E0',
+  },
+});
