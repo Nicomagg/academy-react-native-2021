@@ -32,25 +32,14 @@ const HomeStack = () => {
   );
 };
 
-const homeStackOptions = {
-  headerTitleAlign: 'center',
-  headerRight: () => <MenuIcon />,
-};
-
-const drawerScreenOptions = {
-  headerShown: true,
-  headerTitleAlign: 'center',
-  headerRight: () => <MenuIcon />,
-  headerLeft: () => <></>,
-};
-
 const App = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
         initialRouteName="Home"
         drawerPosition="right"
-        drawerContentOptions={drawerContentOptions}>
+        drawerContentOptions={drawerContentOptions}
+        drawerStyle={drawerStyles}>
         <Drawer.Screen name="Home" component={HomeStack} />
         <Drawer.Screen
           options={drawerScreenOptions}
@@ -65,6 +54,24 @@ const App = () => {
       </Drawer.Navigator>
     </NavigationContainer>
   );
+};
+
+const homeStackOptions = {
+  headerTitleAlign: 'center',
+  headerRight: () => <MenuIcon />,
+};
+
+const drawerScreenOptions = {
+  headerShown: true,
+  headerTitleAlign: 'center',
+  headerRight: () => <MenuIcon />,
+  headerLeft: () => <></>,
+};
+
+const drawerStyles = {
+  borderTopStartRadius: 30,
+  borderBottomStartRadius: 30,
+  paddingTop: 30,
 };
 
 const drawerContentOptions = {
