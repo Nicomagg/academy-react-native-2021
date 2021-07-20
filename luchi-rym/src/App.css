@@ -24,6 +24,18 @@ svg {
   height: 40;
 }
 
+.alive {
+  fill: rgb(0, 170, 0);
+}
+
+.dead {
+  fill: rgb(255, 0, 0);
+}
+
+.unknown {
+  fill: rgb(134, 134, 134);
+}
+
 .accordion-body {
   color: white;
   background-color: rgb(49, 49, 49);

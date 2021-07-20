@@ -1,4 +1,5 @@
 import React from "react";
+import { AliveBullet, DeadBullet, UnknownBullet } from "./SVG";
 import "../App.css";
 
 const CharGrid = ({ characters = [] }) => {
@@ -21,7 +22,14 @@ const CharGrid = ({ characters = [] }) => {
                 <hr />
                 <p className="card-text">
                   <strong>Status: </strong>
-                  {item.status} {/* {item.status=="Dead" ? } */}
+                  {item.status === "Alive" ? (
+                    <AliveBullet />
+                  ) : item.status === "Dead" ? (
+                    <DeadBullet />
+                  ) : (
+                    <UnknownBullet />
+                  )}{" "}
+                  {item.status}
                   <br />
                   <strong>Last known location: </strong>
                   {item.location.name}
