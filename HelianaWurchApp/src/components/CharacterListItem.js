@@ -1,18 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Image, Text, View} from 'react-native';
-import {globalStyles} from '../styles/globalStyleSheet';
+import {globalStyles, COLORS} from '../styles/globalStyleSheet';
 
 export default function CharacterListItem({character}) {
+  const statusColors = {
+    Alive: COLORS.tertiary,
+    unknown: COLORS.secondary,
+    Dead: COLORS.gray,
+  };
+  const [statusColor, setStatusColor] = useState(
+    statusColors[character.status],
+  );
+
   return (
     <View style={globalStyles.container}>
       <Image source={{uri: character.image}} style={globalStyles.image} />
       <View style={globalStyles.infoContainer}>
+        <View
+          style={{
+            ...globalStyles.bullet,
+            backgroundColor: statusColor,
+          }}
+        />
         <Text style={globalStyles.character_name}>{character.name}</Text>
         <Text>
           Gender:
           <Text style={globalStyles.character_info}> {character.gender}</Text>
         </Text>
-
         <Text>
           Last known location: {''}
           <Text style={globalStyles.character_info}>

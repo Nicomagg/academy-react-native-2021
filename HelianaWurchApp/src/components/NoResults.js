@@ -1,6 +1,14 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+
+import {globalStyles} from '../styles/globalStyleSheet';
 
 export default function NoResults() {
-  return <Text>No Results</Text>;
+  return (
+    <View style={globalStyles.container}>
+      <Text style={globalStyles.title}>
+        Sorry, we couldn't find any character for your search!
+      </Text>
+    </View>
+  );
 }
