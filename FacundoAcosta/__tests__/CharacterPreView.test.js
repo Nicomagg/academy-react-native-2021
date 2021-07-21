@@ -28,15 +28,31 @@ describe('<CharacterPreView />', () => {
         )
     });
 
-    test('Rendering Text Elements', () => {
+    it('Renders Text Elements', () => {
         expect(characterPreView).toBeDefined();
         characterPreView.getByText(characterMock.name);
-        characterPreView.getByText(characterMock.status);
-        characterPreView.getByText(characterMock.species);
+        characterPreView.getByText(`${characterMock.status} ${characterMock.species}`);
         characterPreView.getByText(characterMock.origin.name);
         characterPreView.getByText(characterMock.location.name);
         characterPreView.getByText('Last known location:');
         characterPreView.getByText('First seen in:');
-  
-    })
+        expect(characterPreView.getByTestId('CollorBullet').props.style.backgroundColor).toBe('green');
+    });
+
+    it('collor bullet backgroundColor deppending on character status', () =>{
+
+        expect(characterPreView.getByTestId('CollorBullet').props.style.backgroundColor).toBe('green');
+
+        characterMock.status = 'Dead';
+        characterPreView = render(
+            <CharacterPreView character={characterMock} />
+        );
+        expect(characterPreView.getByTestId('CollorBullet').props.style.backgroundColor).toBe('yellow');
+
+        characterMock.status = 'unknown';
+        characterPreView = render(
+            <CharacterPreView character={characterMock} />
+        );
+        expect(characterPreView.getByTestId('CollorBullet').props.style.backgroundColor).toBe('grey');
+    });
 })

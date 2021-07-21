@@ -24,13 +24,14 @@ function CharacterList() {
                     activeOpacity={0.6}
                     underlayColor='#DDDDDD'
                     onPress={()=> navigation.navigate('characterDetails', item)}
+                    testID={'Characters Preview'}
                     >
                     <CharacterPreView character={item}/>
                 </TouchableHighlight>
             );
         } else {
             return (
-                <Text style={styles.component} >{item.name}</Text>
+                <Text style={styles.component} testID={'Location and Episode view'}>{item.name}</Text>
             );
         }
         
