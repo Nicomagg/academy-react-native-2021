@@ -4,10 +4,13 @@ import {Dimensions} from 'react-native';
 const win = Dimensions.get('window');
 const ratio = win.width / 540;
 
-const white = '#fff';
-const gray = '#E0E0E0';
-const primary = '#2874A6';
-const secondary = '#7FB3D5';
+export const COLORS = {
+  white: '#fff',
+  gray: '#E0E0E0',
+  primary: '#2874A6',
+  secondary: '#7FB3D5',
+  tertiary: '#7BBA9C',
+};
 
 export const globalStyles = StyleSheet.create({
   container: {
@@ -18,7 +21,7 @@ export const globalStyles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     borderBottomWidth: 1,
-    borderBottomColor: gray,
+    borderBottomColor: COLORS.gray,
   },
   infoContainer: {
     flex: 2,
@@ -31,11 +34,24 @@ export const globalStyles = StyleSheet.create({
   character_name: {
     fontSize: 16,
     fontWeight: '700',
-    color: primary,
+    color: COLORS.primary,
     paddingRight: 15,
   },
   character_info: {
-    color: primary,
+    color: COLORS.primary,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: '700',
+    color: COLORS.primary,
+    paddingRight: 40,
+  },
+  bullet: {
+    height: 12,
+    width: 12,
+    borderRadius: 6,
+    alignSelf: 'flex-end',
+    marginTop: -5,
   },
 });
 
@@ -45,9 +61,9 @@ export const textInputStyles = StyleSheet.create({
     borderWidth: 1,
     paddingLeft: 20,
     margin: 5,
-    borderColor: primary,
+    borderColor: COLORS.primary,
     borderRadius: 5,
-    backgroundColor: white,
+    backgroundColor: COLORS.white,
   },
 });
 
@@ -59,11 +75,11 @@ export const textListStyles = StyleSheet.create({
   text_list: {
     fontSize: 14,
     fontWeight: '700',
-    color: primary,
+    color: COLORS.primary,
     paddingBottom: 10,
     margin: 17,
     borderBottomWidth: 1,
-    borderBottomColor: gray,
+    borderBottomColor: COLORS.gray,
   },
 });
 
@@ -93,13 +109,13 @@ export const characterProfileStyles = StyleSheet.create({
   character_name: {
     fontSize: 36,
     fontWeight: '700',
-    color: primary,
+    color: COLORS.primary,
     paddingRight: 15,
   },
   character_species: {
     fontSize: 24,
     fontWeight: '700',
     marginTop: -5,
-    color: secondary,
+    color: COLORS.secondary,
   },
 });
