@@ -15,7 +15,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Home from './pages/Home';
 import MenuIcon from './components/MenuIcon';
 import AllLocations from './pages/AllLocations';
-import AllEpisodes from './pages/AllEpidodes';
+import AllEpisodes from './pages/AllEpisodes';
 import BackButton from './components/BackButton';
 
 const Stack = createStackNavigator();
