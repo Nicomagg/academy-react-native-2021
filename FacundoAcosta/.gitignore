@@ -2,6 +2,10 @@
 #
 .DS_Store
 
+# Coverage
+coverage/
+.coverage*
+
 # Xcode
 #
 build/

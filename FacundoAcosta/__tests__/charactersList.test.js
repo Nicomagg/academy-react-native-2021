@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
 import CharacterList from '../Components/charactersList'
@@ -123,7 +123,7 @@ describe("<characters List />", () => {
     it("Should change page state one time on scroll end", () => {
         fireEvent.scroll(component.getByTestId('Characters List'), eventData );
         expect(contextMock.page.setPage).toHaveBeenCalledTimes(1);
-        expect(contextMock.page.setPage.mock.calls[0][0]).toEqual(contextMock.page.Page + 1);
+        expect(contextMock.page.setPage).toHaveBeenCalledWith(contextMock.page.Page + 1);
     });
 
     it("Shouldn't change page on scroll end when has more equals false", () => {
@@ -215,11 +215,9 @@ describe("<characters List />", () => {
         fireEvent.press(component.getAllByTestId('Characters Preview')[1]);
         expect(mockedNavigation).toHaveBeenCalledTimes(2);
 
-        expect(mockedNavigation.mock.calls[0][0]).toBe('characterDetails');
-        expect(mockedNavigation.mock.calls[0][1]).toStrictEqual(contextMock.char.characters[0]);
+        expect(mockedNavigation).toHaveBeenCalledWith('characterDetails',contextMock.char.characters[0]);
 
-        expect(mockedNavigation.mock.calls[1][0]).toBe('characterDetails');
-        expect(mockedNavigation.mock.calls[1][1]).toStrictEqual(contextMock.char.characters[1]);
+        expect(mockedNavigation).toHaveBeenLastCalledWith('characterDetails',contextMock.char.characters[1]);
     });
 });
 

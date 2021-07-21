@@ -1,4 +1,4 @@
-import React, { useState , useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { View , TextInput ,StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -24,11 +24,13 @@ function SearchBar() {
                 selectedValue={searchLabel.filter}
                 style={{ height: 40, width: 100 , flex:0.5}}
                 mode='dropdown'
-                onValueChange={(itemValue) => {
+                onValueChange={({ itemValue ,nativeEvent }) => {
+                    if (nativeEvent) itemValue = nativeEvent.itemValue;
                     searchLabel.setFilter(itemValue);
                     char.setCharacters([]);
                     page.setPage(1);
                 }}
+                testID={'Search Bar Picker'}
             >
                 <Picker.Item label="Characters" value="character" />
                 <Picker.Item label="Location" value="location" />
