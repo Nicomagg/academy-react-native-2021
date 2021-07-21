@@ -24,13 +24,14 @@ function CharacterList() {
                     activeOpacity={0.6}
                     underlayColor='#DDDDDD'
                     onPress={()=> navigation.navigate('characterDetails', item)}
+                    testID={'Characters Preview'}
                     >
                     <CharacterPreView character={item}/>
                 </TouchableHighlight>
             );
         } else {
             return (
-                <Text style={styles.component} >{item.name}</Text>
+                <Text style={styles.component} testID={'Location and Episode view'}>{item.name}</Text>
             );
         }
         
@@ -42,15 +43,16 @@ function CharacterList() {
         )
     }
     return (
-        <View style={styles.container}>
+        <View>
             <FlatList 
                 data={handleSearch(char.characters)}
                 ItemSeparatorComponent={itemSeparator}
                 ListFooterComponent={itemSeparator}
                 ListHeaderComponent={itemSeparator}
                 renderItem={renderCharacter}
+                keyExtractor={character => character.id}
+                testID={'Characters List'}
                 onEndReached={loadMoreCharactes}
-                keyExtractor={character => character.id} 
             />
         </View>
     )
