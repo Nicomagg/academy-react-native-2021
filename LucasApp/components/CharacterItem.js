@@ -1,10 +1,14 @@
 import React from 'react';
 import {Text, View, StyleSheet, Pressable, Image} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const CharacterItem = ({data}) => {
+  const navigation = useNavigation();
   const {image, name, status, species, location, origin} = data;
   return (
-    <Pressable android_ripple={{color: '#eee'}}>
+    <Pressable
+      android_ripple={{color: '#eee'}}
+      onPress={() => navigation.navigate('Character Details', data)}>
       <View style={styles.container}>
         <Image style={styles.image} source={{uri: image}} />
         <View style={styles.info}>
