@@ -18,7 +18,7 @@ function CharacterPreView({ character }) {
             <View style= {styles.data}>
                 <Text style={styles.name}>{character.name}</Text>
                 <View style={styles.status}>
-                    <View style={{...styles.collorBullet, backgroundColor: color}} ></View>
+                    <View style={{...styles.collorBullet, backgroundColor: color}} testID={'CollorBullet'}></View>
                     <Text>{character.status}{" "}{character.species}</Text>
                 </View>
                 <Text>Last known location:</Text>
