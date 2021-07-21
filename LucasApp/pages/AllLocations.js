@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
+import ItemsList from '../components/ItemsList';
 import api from './../api';
 
 const AllLocations = () => {
@@ -21,7 +22,7 @@ const AllLocations = () => {
       {status === 'LOADING' && (
         <ActivityIndicator size="large" color="#999999" />
       )}
-      {status === 'RESOLVED' && <Text>{JSON.stringify(data)}</Text>}
+      {status === 'RESOLVED' && <ItemsList data={data} />}
       {status === 'REJECTED' && (
         <Text>Error loading data. Please try again later.</Text>
       )}

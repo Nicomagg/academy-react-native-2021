@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import api from '../api';
+import ItemsList from '../components/ItemsList';
 
 const AllEpisodes = () => {
   const [status, setStatus] = useState('LOADING');
@@ -21,7 +22,7 @@ const AllEpisodes = () => {
       {status === 'LOADING' && (
         <ActivityIndicator size="large" color="#999999" />
       )}
-      {status === 'RESOLVED' && <Text>{JSON.stringify(data)}</Text>}
+      {status === 'RESOLVED' && <ItemsList data={data} />}
       {status === 'REJECTED' && (
         <Text>Error loading data. Please try again later.</Text>
       )}
