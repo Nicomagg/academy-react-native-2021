@@ -13,6 +13,8 @@ import CharacterList from './src/views/CharacterList';
 import EpisodeList from './src/views/EpisodeList';
 import LocationList from './src/views/LocationList';
 
+import CharacterProfile from './src/views/CharacterProfile';
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +25,7 @@ function AllEpisodes() {
         <Stack.Screen
           name="Episodes List"
           component={EpisodeList}
-          options={{title: 'All Episodes'}}
+          options={{title: 'Episodes'}}
         />
       </Stack.Navigator>
     </AllEpisodesContextProvider>
@@ -37,7 +39,7 @@ function AllLocations() {
         <Stack.Screen
           name="LocationList"
           component={LocationList}
-          options={{title: 'All Locations'}}
+          options={{title: 'Locations'}}
         />
       </Stack.Navigator>
     </AllLocationsContextProvider>
@@ -53,6 +55,11 @@ function HomeScreen({navigation}) {
           component={CharacterList}
           options={{title: 'Rick & Morty'}}
         />
+        <Stack.Screen
+          name="CharacterProfile"
+          component={CharacterProfile}
+          options={{title: 'Character Profile'}}
+        />
       </Stack.Navigator>
     </CharactersContextProvider>
   );
@@ -60,10 +67,25 @@ function HomeScreen({navigation}) {
 
 const App = () => (
   <NavigationContainer>
-    <Drawer.Navigator initialRouteName="Home" drawerPosition="right">
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="All Episodes" component={AllEpisodes} />
-      <Drawer.Screen name="All Locations" component={AllLocations} />
+    <Drawer.Navigator
+      initialRouteName="Home"
+      drawerPosition="right"
+      jumpTo="Home">
+      <Drawer.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{title: 'Home'}}
+      />
+      <Drawer.Screen
+        name="All Episodes"
+        component={AllEpisodes}
+        options={{title: 'Episodes'}}
+      />
+      <Drawer.Screen
+        name="AllLocations"
+        component={AllLocations}
+        options={{title: 'Locations'}}
+      />
     </Drawer.Navigator>
   </NavigationContainer>
 );
