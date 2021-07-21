@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, TouchableOpacity} from 'react-native';
 
 import {CharactersContext} from '../contexts/CharactersContext';
 
@@ -17,6 +17,10 @@ export default function CharacterList({navigation}) {
     loadMoreItem,
   } = useContext(CharactersContext);
 
+  function handleOnPress(item) {
+    navigation.navigate('CharacterProfile', item);
+  }
+
   return (
     <View>
       <View>
@@ -26,10 +30,14 @@ export default function CharacterList({navigation}) {
         />
         <FlatList
           data={search ? filteredCharacters : characters}
-          renderItem={({item}) => <CharacterListItem character={item} />}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => handleOnPress({item})}>
+              <CharacterListItem character={item} />
+            </TouchableOpacity>
+          )}
           keyExtractor={item => item.id}
           ListEmptyComponent={NoResults}
-          contentContainerStyle={{paddingBottom: 120}}
+          contentContainerStyle={{paddingBottom: 100}}
           onEndReached={loadMoreItem}
           onEndReachedThreshold={0.5}
         />
