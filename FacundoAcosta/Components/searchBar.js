@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { charactersContext } from './rick&mortyContext';
 
 function SearchBar() {
-    const { searchVal , searchLabel } = useContext(charactersContext);
+    const { searchVal , searchLabel, page , char } = useContext(charactersContext);
 
     return (
         <View style={styles.container}>
@@ -24,11 +24,15 @@ function SearchBar() {
                 selectedValue={searchLabel.filter}
                 style={{ height: 40, width: 100 , flex:0.5}}
                 mode='dropdown'
-                onValueChange={(itemValue) => searchLabel.setFilter(itemValue)}
+                onValueChange={(itemValue) => {
+                    searchLabel.setFilter(itemValue);
+                    char.setCharacters([]);
+                    page.setPage(1);
+                }}
             >
-                <Picker.Item label="Name" value="Name" />
-                <Picker.Item label="Location" value="Location" />
-                <Picker.Item label="Episode" value="Episode" />
+                <Picker.Item label="Characters" value="character" />
+                <Picker.Item label="Location" value="location" />
+                <Picker.Item label="Episode" value="episode" />
             </Picker>
         </View>
     )
@@ -48,14 +52,14 @@ const styles = StyleSheet.create({
         height: 40,
         alignSelf: 'center',
         marginLeft: 15,
-        flex: 0.85
+        flex: 0.75
     },
     icon: {
         alignSelf: 'center',
         marginLeft: 5
     },
     textInput: {
-        flex: 0.95,
+        flex: 0.95
     }
 })
 

@@ -7,9 +7,9 @@ import SearchBar from './searchBar';
 function Home() {
 
     return (
-    <View>
+    <View style={{flex: 0.9}}>
         <SearchBar />
-        <CharacterList />
+        <CharacterList/>
     </View>
     ) 
     
