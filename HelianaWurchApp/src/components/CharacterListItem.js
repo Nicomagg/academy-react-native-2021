@@ -21,11 +21,12 @@ export default function CharacterListItem({character}) {
             ...globalStyles.bullet,
             backgroundColor: statusColor,
           }}
+          testID={'bullet'}
         />
         <Text style={globalStyles.character_name}>{character.name}</Text>
         <Text>
-          Gender:
-          <Text style={globalStyles.character_info}> {character.gender}</Text>
+          Gender:{''}
+          <Text style={globalStyles.character_info}>{character.gender}</Text>
         </Text>
         <Text>
           Last known location: {''}
@@ -34,13 +35,12 @@ export default function CharacterListItem({character}) {
           </Text>
         </Text>
         <Text>
-          Status:
-          <Text style={globalStyles.character_info}> {character.status}</Text>
+          Status: {''}
+          <Text style={globalStyles.character_info}>{character.status}</Text>
         </Text>
         <Text>
-          First seen in:
+          First seen in:{' '}
           <Text style={globalStyles.character_info}>
-            {' '}
             {character.origin.name}
           </Text>
         </Text>

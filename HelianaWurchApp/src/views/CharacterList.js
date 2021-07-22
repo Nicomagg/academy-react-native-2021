@@ -38,7 +38,7 @@ export default function CharacterList({navigation}) {
           )}
           keyExtractor={item => item.id}
           ListEmptyComponent={!isLoading ? NoResults : null}
-          contentContainerStyle={{paddingBottom: 100}}
+          contentContainerStyle={{paddingBottom: 150}}
           onEndReached={loadMoreItem}
           onEndReachedThreshold={0.5}
           ListFooterComponent={isLoading ? LoadIndicator : null}
