@@ -16,6 +16,7 @@ import Home from './pages/Home';
 import MenuIcon from './components/MenuIcon';
 import AllLocations from './pages/AllLocations';
 import AllEpisodes from './pages/AllEpisodes';
+import CharacterDetails from './pages/CharacterDetails';
 import BackButton from './components/BackButton';
 
 const Stack = createStackNavigator();
@@ -28,6 +29,11 @@ const HomeStack = () => {
         name="Rick & Morty"
         component={Home}
         options={homeStackOptions}
+      />
+      <Stack.Screen
+        name="Character Details"
+        component={CharacterDetails}
+        options={drawerScreenOptions}
       />
     </Stack.Navigator>
   );

@@ -3,6 +3,17 @@ import {render} from '@testing-library/react-native';
 import CharactersList from '../components/CharactersList';
 import {allCharacters} from '../responses';
 
+const mockedNavigate = jest.fn();
+
+jest.mock('@react-navigation/native', () => {
+  return {
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => ({
+      navigate: mockedNavigate,
+    }),
+  };
+});
+
 let component;
 
 describe('<CharactersList />', () => {
