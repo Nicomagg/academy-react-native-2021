@@ -1,7 +1,9 @@
 import React, {useContext} from 'react';
 import {FlatList} from 'react-native';
+import NoResults from '../components/NoResults';
 
 import TextListItem from '../components/TextListItem';
+import LoadIndicator from '../components/LoadIndicator';
 
 import {AllLocationsContext} from '../contexts/AllLocationsContext';
 
@@ -13,7 +15,7 @@ export default function LocationList() {
       data={locations}
       renderItem={({item}) => <TextListItem text={item} />}
       keyExtractor={item => item.id}
-      // ListEmptyComponent={NoResults}
+      ListEmptyComponent={isLoading ? LoadIndicator : NoResults}
     />
   );
 }

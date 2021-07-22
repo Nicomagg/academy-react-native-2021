@@ -16,6 +16,7 @@ export const globalStyles = StyleSheet.create({
   container: {
     flex: 3,
     flexDirection: 'row',
+    alignContent: 'center',
     justifyContent: 'center',
     paddingVertical: 15,
     paddingLeft: 10,
