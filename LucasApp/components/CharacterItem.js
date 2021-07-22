@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet, Pressable, Image} from 'react-native';
+import StatusBullet from './StatusBullet';
 
 const CharacterItem = ({data}) => {
   const {image, name, status, species, location, origin} = data;
@@ -12,9 +13,13 @@ const CharacterItem = ({data}) => {
             <Text numberOfLines={2} style={styles.name}>
               {name}
             </Text>
-            <Text style={styles.status}>
-              {status} {species}
-            </Text>
+            <View style={styles.status}>
+              <StatusBullet status={status} />
+              <Text style={styles.statusText}>
+                {status} {species}
+              </Text>
+            </View>
+
             <Text style={styles.label}>Last known location:</Text>
             <Text numberOfLines={1} style={styles.location}>
               {location.name}
@@ -58,9 +63,13 @@ const styles = StyleSheet.create({
     color: '#888',
   },
   status: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  statusText: {
     fontWeight: 'bold',
     color: '#888',
-    marginTop: 10,
     fontSize: 14,
   },
   label: {fontWeight: 'bold', color: '#888', fontSize: 14},

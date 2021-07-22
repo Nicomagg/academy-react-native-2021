@@ -16,7 +16,6 @@ const SearchBar = props => {
         <TextInput
           clearButtonMode="unless-editing"
           style={styles.input}
-          onSubmitEditing={({nativeEvent: {text}}) => props.handleSearch(text)}
           onChangeText={text => props.handleSearch(text)}
           testID="search-input"
         />
