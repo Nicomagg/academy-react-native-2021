@@ -4,13 +4,13 @@ import "../App.css";
 
 const CharGrid = ({ characters = [] }) => {
   return (
-    <div className="row" style={{ padding: 10 }}>
+    <div className="row">
       {characters.map((item, index) => (
-        <div key={index} className="card mb-3" style={{ maxWidth: 540 }}>
+        <div key={index} className="card mb-3" style={{ maxWidth: 512 }}>
           <div className="row g-0">
             <div className="col-md-4">
               <img
-                className="img-fluid rounded-start"
+                className="rounded-start card-img-top"
                 src={item.image}
                 alt={item.name}
                 style={{ minWidth: 170 }}
