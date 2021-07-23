@@ -13,13 +13,42 @@ import Home from "./components/Home";
 import Pagination from "./components/Pagination";
 import Error from "./components/Error";
 import Search from "./components/Search";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import Locations from "./components/Locations";
 
 export default function App() {
   const drawer = useRef(null);
   const [drawerPosition, setDrawerPosition] = useState("right");
   const navigationView = () => (
     <View style={[styles.container, styles.navigationContainer]}>
-      <Text style={styles.paragraph}>Inside Drawer</Text>
+      <Text
+        style={styles.paragraph}
+        onPress={() => {
+          setCurrentPageUrl("https://rickandmortyapi.com/api/character");
+          drawer.current.closeDrawer();
+        }}
+      >
+        HOME
+      </Text>
+      <Text
+        style={styles.paragraph}
+        onPress={() => {
+          setCurrentPageUrl("https://rickandmortyapi.com/api/location");
+          drawer.current.closeDrawer();
+        }}
+      >
+        Locations
+      </Text>
+      <Text
+        style={styles.paragraph}
+        onPress={() => {
+          setCurrentPageUrl("https://rickandmortyapi.com/api/episode");
+          drawer.current.closeDrawer();
+        }}
+      >
+        Episodes
+      </Text>
     </View>
   );
 
@@ -34,6 +63,8 @@ export default function App() {
   const [nextPageUrl, setNextPageUrl] = useState();
   const [prevPageUrl, setPrevPageUrl] = useState();
   const [pages, setPages] = useState();
+  const [locations, setLocations] = useState([]);
+  const [episodes, setEpisodes] = useState([]);
   //new code
 
   useEffect(() => {
@@ -44,6 +75,8 @@ export default function App() {
         const res = await fetch(url);
         const data = await res.json();
         setCharacters(data.results);
+        setLocations(data.results);
+        setEpisodes(data.results);
         setLoading(false);
         setNextPageUrl(data.info.next);
         setPrevPageUrl(data.info.prev);
@@ -96,7 +129,12 @@ export default function App() {
           style={styles.scrollView}
           contentContainerStyle={styles.contentContainer}
         >
-          <Home characters={characters} />
+          <Home
+            characters={characters}
+            currentPageUrl={currentPageUrl}
+            locations={locations}
+            episodes={episodes}
+          />
           {error && (
             <Error error={error} setCurrentPageUrl={setCurrentPageUrl} />
           )}
