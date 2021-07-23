@@ -25,7 +25,7 @@ export default function CharacterListItem({character}) {
         />
         <Text style={globalStyles.character_name}>{character.name}</Text>
         <Text>
-          Gender:{''}
+          Gender:{' '}
           <Text style={globalStyles.character_info}>{character.gender}</Text>
         </Text>
         <Text>

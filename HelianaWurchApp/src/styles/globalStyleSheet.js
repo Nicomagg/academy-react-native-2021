@@ -82,6 +82,13 @@ export const textListStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: COLORS.gray,
   },
+  text_loading: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: COLORS.primary,
+    alignSelf: 'center',
+    paddingBottom: 25,
+  },
 });
 
 export const characterProfileStyles = StyleSheet.create({
