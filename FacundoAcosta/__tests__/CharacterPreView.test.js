@@ -28,12 +28,13 @@ describe('<CharacterPreView />', () => {
         )
     });
 
-    it('Renders Text Elements', () => {
+    it('Renders Correctly', () => {
         expect(characterPreView).toBeDefined();
         characterPreView.getByText(characterMock.name);
         characterPreView.getByText(`${characterMock.status} ${characterMock.species}`);
         characterPreView.getByText(characterMock.origin.name);
         characterPreView.getByText(characterMock.location.name);
+        expect(characterPreView.getByTestId('CharaccterPreView Image').props.source.uri).toBe(characterMock.image);
         characterPreView.getByText('Last known location:');
         characterPreView.getByText('First seen in:');
         expect(characterPreView.getByTestId('CollorBullet').props.style.backgroundColor).toBe('green');

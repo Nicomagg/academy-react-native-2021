@@ -1,4 +1,4 @@
-import React, { useState , useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { View , TextInput ,StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -29,14 +29,14 @@ function SearchBar() {
                     char.setCharacters([]);
                     page.setPage(1);
                 }}
+                testID={'Search Bar Picker'}
             >
                 <Picker.Item label="Characters" value="character" />
                 <Picker.Item label="Location" value="location" />
                 <Picker.Item label="Episode" value="episode" />
             </Picker>
         </View>
-    )
-
+    );
 }
 
 const styles = StyleSheet.create({
