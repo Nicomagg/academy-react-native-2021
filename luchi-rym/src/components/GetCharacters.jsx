@@ -14,11 +14,22 @@ function GetCharacters() {
     fetch(initialurl)
       .then((rsp) => rsp.json())
       .then((data) => {
+        data.error && (data = { info: null, results: [] });
         setInfo(data.info);
         setCharacters(data.results);
       })
       .catch((error) => console.log(error));
   };
+
+  const renderPagination = () =>
+    info && (
+      <Pagination
+        prev={info.prev}
+        next={info.next}
+        onPrev={onPrev}
+        onNext={onNext}
+      />
+    );
 
   const onPrev = () => {
     pers(info.prev);
@@ -64,23 +75,14 @@ function GetCharacters() {
         <div className="mt-1">
           <p id="welcome">
             This is a simple WebApp which permits you to find any character from
-            famous Rick & Morty animated show. <br /> Use pagination buttons to see all
-            characters or search any character in particular.
+            famous Rick & Morty animated show. <br /> Use pagination buttons to
+            see all characters or search any character in particular.
           </p>
         </div>
       </div>
-      <Pagination
-        prev={info.prev}
-        next={info.next}
-        onPrev={onPrev}
-        onNext={onNext}
-      />
+      {renderPagination()}
       <CharGrid className="grid" characters={characters} />
-        <Pagination
-        prev={info.prev}
-        next={info.next}
-        onPrev={onPrev}
-        onNext={onNext}      />
+      {renderPagination()}
     </>
   );
 }
