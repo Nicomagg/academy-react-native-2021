@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../App.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSync } from "@fortawesome/free-solid-svg-icons";
-import CharGrid from "./CharGrid";
+import { CharGrid } from "./CharGrid";
 import Pagination from "./Pagination";
 
 function GetCharacters() {
@@ -29,7 +29,7 @@ function GetCharacters() {
 
   useEffect(() => {
     pers(initialurl);
-  }, []);
+  }, [initialurl]);
 
   const onType = (t) => {
     setSearcht(t.target.value);
@@ -62,12 +62,12 @@ function GetCharacters() {
           </a>
         </div>
         <div className="mt-1">
-          <p>
+          <p id="welcome">
             This is a simple WebApp which permits you to find any character from
-            famous Rick & Morty animated show. Use pagination buttons to see all
-            characters or search anything in particular.
+            famous Rick & Morty animated show. <br /> Use pagination buttons to see all
+            characters or search any character in particular.
           </p>
-        </div>{" "}
+        </div>
       </div>
       <Pagination
         prev={info.prev}
@@ -76,12 +76,11 @@ function GetCharacters() {
         onNext={onNext}
       />
       <CharGrid className="grid" characters={characters} />
-      <Pagination
+        <Pagination
         prev={info.prev}
         next={info.next}
         onPrev={onPrev}
-        onNext={onNext}
-      />
+        onNext={onNext}      />
     </>
   );
 }

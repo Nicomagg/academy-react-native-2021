@@ -50,6 +50,24 @@ svg {
   padding-bottom: 25px;
 }
 
+footer{
+  text-align: center;
+  color: rgb(166, 211, 43);
+  padding-bottom: 20px;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#welcome{ 
+  text-align: center;
+  color: rgb(255, 255, 255);
+  padding-bottom: 20px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: bold;
+  font-size: 1.55em;
+}
+
 @media (max-width: 988px) {
   .src {
     width: 100% !important;
