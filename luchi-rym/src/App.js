@@ -5,7 +5,7 @@ import GetCharacters from "./components/GetCharacters";
 
 function App() {
   return (
-    <main>
+    <main style={{paddingBottom: 20}}>
       <GetCharacters />
     </main>
   );
