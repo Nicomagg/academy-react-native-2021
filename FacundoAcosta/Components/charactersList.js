@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { View , StyleSheet , FlatList, TouchableHighlight } from 'react-native';
+import { View , StyleSheet , FlatList, TouchableHighlight, Text } from 'react-native';
 import { charactersContext } from './rick&mortyContext';
 import CharacterPreView from './characterPreView';
 import { useNavigation } from '@react-navigation/native';
@@ -11,29 +11,31 @@ function CharacterList() {
     const navigation = useNavigation();
 
     const loadMoreCharactes = () => {
-        if (more.hasMore) {
-            const nextPage = page.characterPage + 1;
-            page.setCharacterPage(nextPage);
-        }
+        if (more.hasMore) page.setPage(page.Page + 1);
     }
 
-    const handleSearch = (data) => {
-        if (searchVal.query != '') {
-            if (searchLabel.filter === 'Name') return data.filter(character => (character.name.toLowerCase().indexOf(searchVal.query) > -1));
-            else if (searchLabel.filter === 'Location') return data.filter(character => (character.location.name.toLowerCase().indexOf(searchVal.query) > -1));
-            // else if (searchLabel.filter === 'Episode') return data.filter(character => (character.episode.name.toLowerCase().indexOf(searchVal.query) > -1));
-        }
-        return data;
+    const handleSearch = () => {
+        return char.characters.filter(character => (character.name.toLowerCase().indexOf(searchVal.query.toLowerCase()) > -1));
     }
-    const renderCharacter = ({item}) => (
-        <TouchableHighlight
-            activeOpacity={0.6}
-            underlayColor='#DDDDDD'
-            onPress={()=> navigation.navigate('characterDetails', item)}
-            >
-            <CharacterPreView character={item}/>
-        </TouchableHighlight>
-    )
+    const renderCharacter = ({item}) => {
+        if (searchLabel.filter == 'character') {
+            return (
+                <TouchableHighlight
+                    activeOpacity={0.6}
+                    underlayColor='#DDDDDD'
+                    onPress={()=> navigation.navigate('characterDetails', item)}
+                    testID={'Characters Preview'}
+                    >
+                    <CharacterPreView character={item}/>
+                </TouchableHighlight>
+            );
+        } else {
+            return (
+                <Text style={styles.component} testID={'Location and Episode view'}>{item.name}</Text>
+            );
+        }
+        
+    }
 
     const itemSeparator = () => {
         return (
@@ -41,22 +43,27 @@ function CharacterList() {
         )
     }
     return (
-        <View style={styles.container}>
+        <View>
             <FlatList 
                 data={handleSearch(char.characters)}
                 ItemSeparatorComponent={itemSeparator}
                 ListFooterComponent={itemSeparator}
                 ListHeaderComponent={itemSeparator}
                 renderItem={renderCharacter}
+                keyExtractor={character => character.id}
+                testID={'Characters List'}
                 onEndReached={loadMoreCharactes}
-                keyExtractor={character => character.id} 
             />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-
-})
+    component: {
+        width: '80%',
+        alignSelf: 'center',
+        fontSize: 22,
+    }
+});
 
 export default CharacterList;

@@ -13,7 +13,6 @@ export default function SearchInput({inputValue, handleInputChange}) {
         onChangeText={text => {
           handleInputChange(text);
         }}
-        onEndEditing={() => {}}
       />
     </View>
   );

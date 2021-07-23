@@ -3,6 +3,17 @@ import {fireEvent, render} from '@testing-library/react-native';
 import CharacterItem from '../components/CharacterItem';
 import {character} from '../responses';
 
+const mockedNavigate = jest.fn();
+
+jest.mock('@react-navigation/native', () => {
+  return {
+    ...jest.requireActual('@react-navigation/native'),
+    useNavigation: () => ({
+      navigate: mockedNavigate,
+    }),
+  };
+});
+
 let component;
 
 describe('<CharacterItem />', () => {

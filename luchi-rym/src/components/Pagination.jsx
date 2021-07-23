@@ -19,14 +19,14 @@ const Pagination = ({ prev, next, onPrev, onNext }) => {
               Previous
             </button>
           </li>
-        ) : null}
+        ): prev}
         {next ? (
           <li className="page-item">
             <button className="btn page-link" onClick={handleNext}>
               Next
             </button>
           </li>
-        ) : null}
+        ) : undefined}
       </ul>
     </nav>
   );

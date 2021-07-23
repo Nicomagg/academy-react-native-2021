@@ -5,7 +5,7 @@ function CharacterDetails({ route }) {
     
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={{uri: route.params.image}} />
+            <Image style={styles.image} source={{uri: route.params.image}} testID={'Character Details Image'} />
             <View style={styles.data}>
                 <View style={styles.column}>
                     <Text style={styles.label}>Name:</Text>

@@ -2,22 +2,6 @@ section {
   margin: 10px;
 }
 
-.princ {
-  align-items: center;
-  display: flex;
-  height: max-content;
-  margin: 1%;
-}
-
-.sec {
-  margin: 0 auto;
-}
-
-main {
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 svg {
   fill: rgb(255 255 255);
   width: 40;
@@ -44,4 +28,56 @@ svg {
 .accordion-button {
   color: white;
   background-color: rgb(49, 49, 49);
+}
+
+.card {
+  margin-left: 5px;
+}
+.row {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.src {
+  width: 90% !important;
+}
+
+.containerInput {
+  align-items: flex-end;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 25px;
+}
+
+footer{
+  text-align: center;
+  color: rgb(166, 211, 43);
+  padding-bottom: 20px;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 2em;
+}
+
+#welcome{ 
+  text-align: center;
+  color: rgb(255, 255, 255);
+  padding-bottom: 20px;
+  font-family: 'Lexend Deca', sans-serif;
+  font-weight: bold;
+  font-size: 1.55em;
+}
+
+@media (max-width: 988px) {
+  .src {
+    width: 100% !important;
+  }
+
+  .App {
+    padding: 40px 5px;
+  }
+
+  .containerInput {
+    padding-bottom: 15px;
+  }
 }

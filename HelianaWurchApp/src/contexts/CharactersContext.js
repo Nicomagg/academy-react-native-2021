@@ -1,47 +1,90 @@
 import React, {createContext, useState, useEffect} from 'react';
+import {API_URL} from '../utils/api';
 
 const CharactersContext = createContext();
 
 function CharactersContextProvider({children}) {
-  const [isLoading, setLoading] = useState(true);
-  const [characters, setCharacters] = useState(null);
   const [search, setSearch] = useState('');
+
+  const [currentPage, setCurrentPage] = useState(1);
   const [filteredCharacters, setFilteredCharacters] = useState([]);
 
-  useEffect(() => {
-    fetch('https://rickandmortyapi.com/api/character')
-      .then(response => response.json())
-      .then(json => {
-        setCharacters(json.results);
-        setFilteredCharacters(json.results);
-      })
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
-  }, []);
+  const [isLoading, setLoading] = useState(false);
+  const [characters, setCharacters] = useState([]);
+  const [hasMoreItems, setHasMoreItems] = useState(true);
 
-  const searchFilterFunction = text => {
+  const loadMoreItems = () => {
+    if (hasMoreItems) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    getCharactersData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage]);
+
+  const getCharactersData = () => {
+    if (hasMoreItems) {
+      fetch(`${API_URL}/character/?page=${currentPage}`)
+        .then(response => response.json())
+        .then(json => {
+          checkNextPageAvailable(json);
+          setCharacters([...characters, ...json.results]);
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false));
+    }
+  };
+
+  const searchCharacterFilter = text => {
+    if (hasMoreItems) {
+      setLoading(true);
+      fetch(`${API_URL}/character/?name=${text}`)
+        .then(response => response.json())
+        .then(json => {
+          checkNextPageAvailable(json);
+          setFilteredCharacters(json.results);
+        })
+        .catch(error => {
+          console.error(error);
+          setHasMoreItems(false);
+        })
+        .finally(() => setLoading(false));
+    }
+  };
+
+  const handleInputChange = text => {
     if (text) {
-      const newData = characters.filter(function (item) {
-        const itemData = item.name ? item.name.toUpperCase() : ''.toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredCharacters(newData);
+      setHasMoreItems(true);
+      searchCharacterFilter(text);
       setSearch(text);
     } else {
       setFilteredCharacters(characters);
-      setSearch(text);
+      setSearch('');
     }
   };
+
+  function checkNextPageAvailable(response) {
+    if (response && response.info && response.info.next) {
+      setHasMoreItems(true);
+    } else {
+      setHasMoreItems(false);
+      setCurrentPage(1);
+      setLoading(false);
+    }
+  }
 
   return (
     <CharactersContext.Provider
       value={{
         isLoading,
         characters,
-        searchFilterFunction,
         search,
         filteredCharacters,
+        handleInputChange,
+        loadMoreItems,
       }}>
       {children}
     </CharactersContext.Provider>

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import CharactersList from '../components/CharactersList';
+import SearchBar from '../components/SearchBar';
 import api from './../api';
 
 const Home = () => {
@@ -8,15 +9,13 @@ const Home = () => {
   const [data, setData] = useState();
 
   useEffect(() => {
-    /* api
+    api
       .getAllCharacters()
       .then(response => {
         setData(response);
         setStatus('RESOLVED');
       })
-      .catch(() => setStatus('REJECTED')); */
-
-    handleSearchByName('ohnny Depp'); // works 😀
+      .catch(() => setStatus('REJECTED'));
   }, []);
 
   const handleSearchByName = name => {
@@ -32,7 +31,10 @@ const Home = () => {
 
   return (
     <View style={styles.container}>
-      {status === 'LOADING' && <ActivityIndicator color="#999999" />}
+      <SearchBar handleSearch={handleSearchByName} />
+      {status === 'LOADING' && (
+        <ActivityIndicator size="large" color="#999999" />
+      )}
       {status === 'RESOLVED' && <CharactersList data={data} />}
       {status === 'REJECTED' && (
         <Text>Error loading data. Please try again later.</Text>
