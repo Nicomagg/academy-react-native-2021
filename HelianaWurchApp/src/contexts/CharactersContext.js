@@ -11,9 +11,12 @@ function CharactersContextProvider({children}) {
 
   const [isLoading, setLoading] = useState(false);
   const [characters, setCharacters] = useState([]);
+  const [hasMoreItems, setHasMoreItems] = useState(true);
 
-  const loadMoreItem = () => {
-    setCurrentPage(currentPage + 1);
+  const loadMoreItems = () => {
+    if (hasMoreItems) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   useEffect(() => {
@@ -23,28 +26,38 @@ function CharactersContextProvider({children}) {
   }, [currentPage]);
 
   const getCharactersData = () => {
-    fetch(`${API_URL}/character/?page=${currentPage}`)
-      .then(response => response.json())
-      .then(json => {
-        setCharacters([...characters, ...json.results]);
-      })
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    if (hasMoreItems) {
+      fetch(`${API_URL}/character/?page=${currentPage}`)
+        .then(response => response.json())
+        .then(json => {
+          checkNextPageAvailable(json);
+          setCharacters([...characters, ...json.results]);
+        })
+        .catch(error => console.error(error))
+        .finally(() => setLoading(false));
+    }
   };
 
   const searchCharacterFilter = text => {
-    setLoading(true);
-    fetch(`${API_URL}/character/?name=${text}`)
-      .then(response => response.json())
-      .then(json => {
-        setFilteredCharacters(json.results);
-      })
-      .catch(error => console.error(error))
-      .finally(() => setLoading(false));
+    if (hasMoreItems) {
+      setLoading(true);
+      fetch(`${API_URL}/character/?name=${text}`)
+        .then(response => response.json())
+        .then(json => {
+          checkNextPageAvailable(json);
+          setFilteredCharacters(json.results);
+        })
+        .catch(error => {
+          console.error(error);
+          setHasMoreItems(false);
+        })
+        .finally(() => setLoading(false));
+    }
   };
 
   const handleInputChange = text => {
     if (text) {
+      setHasMoreItems(true);
       searchCharacterFilter(text);
       setSearch(text);
     } else {
@@ -52,6 +65,16 @@ function CharactersContextProvider({children}) {
       setSearch('');
     }
   };
+
+  function checkNextPageAvailable(response) {
+    if (response && response.info && response.info.next) {
+      setHasMoreItems(true);
+    } else {
+      setHasMoreItems(false);
+      setCurrentPage(1);
+      setLoading(false);
+    }
+  }
 
   return (
     <CharactersContext.Provider
@@ -61,7 +84,7 @@ function CharactersContextProvider({children}) {
         search,
         filteredCharacters,
         handleInputChange,
-        loadMoreItem,
+        loadMoreItems,
       }}>
       {children}
     </CharactersContext.Provider>

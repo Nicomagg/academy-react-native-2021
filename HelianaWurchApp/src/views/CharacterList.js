@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
-import {FlatList, View, TouchableOpacity} from 'react-native';
+import {FlatList, View, Text, TouchableOpacity} from 'react-native';
 
 import {CharactersContext} from '../contexts/CharactersContext';
+import {textListStyles} from '../styles/globalStyleSheet';
 
 import SearchInput from '../components/filters/SearchInput';
 import CharacterListItem from '../components/CharacterListItem';
@@ -15,7 +16,7 @@ export default function CharacterList({navigation}) {
     search,
     filteredCharacters,
     handleInputChange,
-    loadMoreItem,
+    loadMoreItems,
   } = useContext(CharactersContext);
 
   function handleOnPress(item) {
@@ -37,9 +38,17 @@ export default function CharacterList({navigation}) {
             </TouchableOpacity>
           )}
           keyExtractor={item => item.id}
-          ListEmptyComponent={!isLoading ? NoResults : null}
+          ListEmptyComponent={
+            !isLoading ? (
+              NoResults
+            ) : (
+              <View style={textListStyles.text_list_container}>
+                <Text style={textListStyles.text_loading}>Loading...</Text>
+              </View>
+            )
+          }
           contentContainerStyle={{paddingBottom: 150}}
-          onEndReached={loadMoreItem}
+          onEndReached={loadMoreItems}
           onEndReachedThreshold={0.5}
           ListFooterComponent={isLoading ? LoadIndicator : null}
         />
