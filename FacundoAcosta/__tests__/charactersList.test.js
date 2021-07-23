@@ -1,8 +1,8 @@
 import React from "react";
 import '@testing-library/jest-native/extend-expect';
 import { fireEvent, render } from '@testing-library/react-native';
-import CharacterList from '../Components/charactersList'
-import { charactersContext } from '../Components/rick&mortyContext'
+import CharacterList from '../Components/charactersList';
+import { charactersContext } from '../Components/rick&mortyContext';
 import contextMock from '../mocks/contextMock';
 
 
@@ -19,10 +19,6 @@ const mockedNavigation = jest.fn();
     });
 
 describe("<characters List />", () => {
-
-    
-
-    const resetContextMock = contextMock;
 
     let component;
 

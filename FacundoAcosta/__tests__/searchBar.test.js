@@ -1,6 +1,6 @@
 import React from "react";
 import '@testing-library/jest-native/extend-expect';
-import { fireEvent, NativeTestEvent , render } from '@testing-library/react-native';
+import { act, fireEvent, NativeTestEvent , render, waitFor } from '@testing-library/react-native';
 import contextMock from '../mocks/contextMock';
 import { charactersContext } from '../Components/rick&mortyContext'
 
@@ -29,16 +29,27 @@ describe('<SearchBar />', () => {
         expect(component.getByTestId('Search Bar Picker').props.selectedIndex).toEqual(0);
     });
 
-    it("Render correctly with characters", () => {
+    it("Changes State with input", () => {
         fireEvent.changeText(component.getByPlaceholderText('Search'), 'asd');
         expect(contextMock.searchVal.setQuery).toHaveBeenCalledWith('asd');
     });
 
-    // it("Render correctly with characters", () => {
-    //     component.debug();
-    //     fireEvent.change(component.getByTestId('Search Bar Picker'), { nativeEvent: { value: 'a' } });
-    //     component.debug();
-    //     expect(contextMock.searchVal.setQuery).toHaveBeenCalledWith('asd');
-    // });
+    it("Changes states values on picker change", () => {
+
+        fireEvent(component.getByTestId('Search Bar Picker'), 'onValueChange', 'location');
+        expect(contextMock.searchLabel.setFilter).toHaveBeenCalledWith('location');
+        expect(contextMock.page.setPage).toHaveBeenCalledWith(1);
+        expect(contextMock.char.setCharacters).toHaveBeenCalledWith([]);
+
+        fireEvent(component.getByTestId('Search Bar Picker'), 'onValueChange', 'episode');
+        expect(contextMock.searchLabel.setFilter).toHaveBeenCalledWith('episode');
+        expect(contextMock.page.setPage).toHaveBeenCalledWith(1);
+        expect(contextMock.char.setCharacters).toHaveBeenCalledWith([]);
+
+        fireEvent(component.getByTestId('Search Bar Picker'), 'onValueChange', 'character');
+        expect(contextMock.searchLabel.setFilter).toHaveBeenCalledWith('character');
+        expect(contextMock.page.setPage).toHaveBeenCalledWith(1);
+        expect(contextMock.char.setCharacters).toHaveBeenCalledWith([]);
+    });
 
 });

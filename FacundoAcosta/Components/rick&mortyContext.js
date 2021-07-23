@@ -20,15 +20,14 @@ export const CharactersProvider = (props) => {
     const navigation = useNavigation();
 
     //Fetching API
-    useEffect(() => {
-        fetch(`https://rickandmortyapi.com/api/${filter}/?` + new URLSearchParams({page: Page}).toString())
+    useEffect(async () => {
+        await fetch(`https://rickandmortyapi.com/api/${filter}/?` + new URLSearchParams({page: Page}).toString())
             .then(res => res.json())
             .then(data => {
                 setCharacters(prevCharacters => [...prevCharacters, ...data.results]);
                 if (data.info.next == null) setHasMore(false);
             })
-            .catch(error => {
-                console.error(error);
+            .catch(() => {
                 navigation.navigate('errorPage');
             })
     }, [Page, filter]);

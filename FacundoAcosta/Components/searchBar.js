@@ -24,8 +24,7 @@ function SearchBar() {
                 selectedValue={searchLabel.filter}
                 style={{ height: 40, width: 100 , flex:0.5}}
                 mode='dropdown'
-                onValueChange={({ itemValue ,nativeEvent }) => {
-                    if (nativeEvent) itemValue = nativeEvent.itemValue;
+                onValueChange={(itemValue) => {
                     searchLabel.setFilter(itemValue);
                     char.setCharacters([]);
                     page.setPage(1);
@@ -37,8 +36,7 @@ function SearchBar() {
                 <Picker.Item label="Episode" value="episode" />
             </Picker>
         </View>
-    )
-
+    );
 }
 
 const styles = StyleSheet.create({

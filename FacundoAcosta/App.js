@@ -1,7 +1,7 @@
 //Basics imports
 import 'react-native-gesture-handler';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 // Navigations imports
 import Icon  from 'react-native-vector-icons/Ionicons'
@@ -14,13 +14,22 @@ import CharacterDetails from './Components/characterDetails';
 import CommonList from './Components/commonList';
 import ErrorPage from './Components/errorPage';
 import DrawerContent from './Components/drawerContent';
-import Home from './Components/home';
 import { CharactersProvider } from './Components/rick&mortyContext';
-
+import CharacterList from './Components/charactersList';
+import SearchBar from './Components/searchBar';
 
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
+
+function home() {
+  return (
+    <View style={{ flex: 0.9 }}>
+      <SearchBar />
+      <CharacterList />
+    </View>
+  );
+}
 
 function StackHomeNav({navigation}) {
   
@@ -29,7 +38,7 @@ function StackHomeNav({navigation}) {
       <Stack.Navigator initialRouteName="Rick and Morty">
         <Stack.Screen 
           name="Rick and Morty" 
-          component={Home}
+          component={home}
           options={{
             title: 'Rick & Morty',
             headerTitleAlign: 'center',
@@ -38,9 +47,13 @@ function StackHomeNav({navigation}) {
               fontWeight: 'bold',
             },
             headerRight: () => (
-              <Icon.Button name="menu" size={30}
-              backgroundColor='white' color='black'
-              onPress={ () => navigation.openDrawer()}></Icon.Button>
+              <Icon.Button 
+                name="menu" 
+                size={30}
+                backgroundColor='white' color='black'
+                onPress={ () => navigation.openDrawer()}
+                testID={'menuButton'}
+              ></Icon.Button>
             )
           }}
         />
@@ -77,7 +90,7 @@ function StackHomeNav({navigation}) {
         />
       </Stack.Navigator>
     </CharactersProvider>   
-  )
+  );
 }
 
 function App() {
@@ -88,9 +101,8 @@ function App() {
         <Drawer.Screen name='Drawer/home' component={StackHomeNav}/>
         <Drawer.Screen name='errorPage' component={ErrorPage} />
       </Drawer.Navigator>
-  </NavigationContainer>
-    
-  )
+  </NavigationContainer> 
+  );
 }
 
 const styles = StyleSheet.create({
