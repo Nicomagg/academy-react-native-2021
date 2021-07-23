@@ -6,6 +6,7 @@ import {CharactersContext} from '../contexts/CharactersContext';
 import SearchInput from '../components/filters/SearchInput';
 import CharacterListItem from '../components/CharacterListItem';
 import NoResults from '../components/NoResults';
+import LoadIndicator from '../components/LoadIndicator';
 
 export default function CharacterList({navigation}) {
   const {
@@ -36,10 +37,11 @@ export default function CharacterList({navigation}) {
             </TouchableOpacity>
           )}
           keyExtractor={item => item.id}
-          ListEmptyComponent={NoResults}
-          contentContainerStyle={{paddingBottom: 100}}
+          ListEmptyComponent={!isLoading ? NoResults : null}
+          contentContainerStyle={{paddingBottom: 150}}
           onEndReached={loadMoreItem}
           onEndReachedThreshold={0.5}
+          ListFooterComponent={isLoading ? LoadIndicator : null}
         />
       </View>
     </View>

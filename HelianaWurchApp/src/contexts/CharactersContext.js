@@ -32,11 +32,6 @@ function CharactersContextProvider({children}) {
       .finally(() => setLoading(false));
   };
 
-  useEffect(() => {
-    getCharactersData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage]);
-
   const searchCharacterFilter = text => {
     setLoading(true);
     fetch(`${API_URL}/character/?name=${text}`)
